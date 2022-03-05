@@ -8,16 +8,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.navigation.OrganizationRoute
 import com.acc.common.ui.theme.mediumPadding
 import com.acc.common.ui.theme.smallPadding
+import com.navigation.produce
 import com.acc.features.orgselection.viewmodel.OrganizationSelectionViewModel
 
 @Composable
-fun OrganizationScreen(
-    viewModel: OrganizationSelectionViewModel,
-    navigateHomeScreen: () -> Unit
-) {
+fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
 
+    val viewModel = produce<OrganizationSelectionViewModel>(OrganizationRoute)
     val selectedCompany by viewModel.selectedCompany.collectAsState()
 
     var showCompanies by remember { mutableStateOf(false) }

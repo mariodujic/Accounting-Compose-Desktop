@@ -1,6 +1,6 @@
 package com.acc.features.orgselection.viewmodel
 
-import com.acc.common.navigation.ViewModel
+import com.navigation.Entry
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -9,7 +9,7 @@ data class Company(
     val selected: Boolean
 )
 
-class OrganizationSelectionViewModel : ViewModel {
+class OrganizationSelectionViewModel : Entry {
 
     val companies = arrayOf(
         Company(name = "Blue", selected = true),

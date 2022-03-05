@@ -1,4 +1,4 @@
-package com.acc.common.navigation
+package com.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -11,7 +11,7 @@ fun rememberNavigation(defaultRoute: Route): Navigation {
     return remember { AppNavigation(defaultRoute = defaultRoute) }
 }
 
-class AppNavigation(defaultRoute: Route) : Navigation {
+private class AppNavigation(defaultRoute: Route) : Navigation {
 
     private val routes: MutableList<Route> = mutableListOf(defaultRoute)
     private val _routeStack: MutableSharedFlow<Route> = MutableStateFlow(defaultRoute)
@@ -23,6 +23,7 @@ class AppNavigation(defaultRoute: Route) : Navigation {
     }
 
     override fun popLast() {
+        popViewModel(routes.last())
         routes.removeLast()
         _routeStack.tryEmit(routes.last())
     }
