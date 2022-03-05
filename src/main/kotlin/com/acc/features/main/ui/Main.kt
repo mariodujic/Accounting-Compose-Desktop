@@ -9,21 +9,22 @@ import com.acc.common.navigation.OrganizationRoute
 import com.acc.common.navigation.rememberNavigation
 import com.acc.common.ui.theme.AppTheme
 import com.acc.features.home.ui.HomeScreen
+import com.acc.features.home.viewmodel.HomeViewModel
 import com.acc.features.orgselection.ui.OrganizationScreen
+import com.acc.features.orgselection.viewmodel.OrganizationSelectionViewModel
 
 @Composable
-@Preview
 fun Main() {
 
-    val navigation = rememberNavigation(defaultRoute = OrganizationRoute)
-    val routes by navigation.routeStack.collectAsState(initial = OrganizationRoute)
+    val navigation = rememberNavigation(defaultRoute = OrganizationRoute(OrganizationSelectionViewModel()))
+    val routes by navigation.routeStack.collectAsState(initial = null)
 
     AppTheme(useDarkTheme = false) {
-        when (routes) {
-            OrganizationRoute -> OrganizationScreen {
-                navigation.navigate(HomeRoute)
+        when (val route = routes) {
+            is OrganizationRoute -> OrganizationScreen(route.viewModel) {
+                navigation.navigate(HomeRoute(HomeViewModel()))
             }
-            HomeRoute -> HomeScreen {
+            is HomeRoute -> HomeScreen(route.viewModel) {
                 navigation.popLast()
             }
         }

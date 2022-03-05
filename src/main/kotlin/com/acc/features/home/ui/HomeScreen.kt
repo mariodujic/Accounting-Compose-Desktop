@@ -9,9 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.acc.features.home.viewmodel.HomeViewModel
 
 @Composable
-fun HomeScreen(navigateBack: () -> Unit) {
+fun HomeScreen(
+    viewModel: HomeViewModel,
+    navigateBack: () -> Unit
+) {
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().background(Color.LightGray)) {
         Button(onClick = navigateBack) {
             Text(text = "Back")

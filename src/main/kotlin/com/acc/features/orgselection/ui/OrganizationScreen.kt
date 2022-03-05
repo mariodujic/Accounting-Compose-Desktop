@@ -10,20 +10,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.acc.common.ui.theme.mediumPadding
 import com.acc.common.ui.theme.smallPadding
-
-val companies = arrayOf(
-    Company(name = "Blue", selected = true),
-    Company(name = "Axor", selected = false)
-)
-
-data class Company(
-    val name: String,
-    val selected: Boolean
-)
-
+import com.acc.features.orgselection.viewmodel.OrganizationSelectionViewModel
 
 @Composable
-fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
+fun OrganizationScreen(
+    viewModel: OrganizationSelectionViewModel,
+    navigateHomeScreen: () -> Unit
+) {
+
+    val selectedCompany by viewModel.selectedCompany.collectAsState()
 
     var showCompanies by remember { mutableStateOf(false) }
 
@@ -34,7 +29,7 @@ fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
                 modifier = Modifier.padding(mediumPadding)
             ) {
                 Text(
-                    text = companies.first { it.selected }.name,
+                    text = selectedCompany.name,
                     style = MaterialTheme.typography.h2
                 )
                 Spacer(modifier = Modifier.height(smallPadding))
@@ -46,9 +41,10 @@ fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
                     onDismissRequest = { showCompanies = false },
                     modifier = Modifier.width(200.dp)
                 ) {
-                    companies.forEach {
+                    viewModel.companies.forEach {
                         DropdownMenuItem(onClick = {
                             showCompanies = false
+                            viewModel.selectCompany(it)
                         }) {
                             Text(text = it.name)
                         }
