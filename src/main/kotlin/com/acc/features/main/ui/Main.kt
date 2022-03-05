@@ -24,6 +24,7 @@ fun Main() {
             is HomeRoute -> HomeScreen(route.viewModel) {
                 navigation.popLast()
             }
+            else -> throw IllegalArgumentException("Unsupported route")
         }
     }
 }
