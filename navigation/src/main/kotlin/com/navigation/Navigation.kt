@@ -2,9 +2,8 @@ package com.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun rememberNavigation(defaultRoute: Route): Navigation {
@@ -14,8 +13,8 @@ fun rememberNavigation(defaultRoute: Route): Navigation {
 private class AppNavigation(defaultRoute: Route) : Navigation {
 
     private val routes: MutableList<Route> = mutableListOf(defaultRoute)
-    private val _routeStack: MutableSharedFlow<Route> = MutableStateFlow(defaultRoute)
-    override val routeStack: SharedFlow<Route> = _routeStack
+    private val _routeStack: MutableStateFlow<Route> = MutableStateFlow(defaultRoute)
+    override val routeStack: StateFlow<Route> = _routeStack
 
     override fun navigate(route: Route) {
         routes.add(route)
@@ -23,7 +22,7 @@ private class AppNavigation(defaultRoute: Route) : Navigation {
     }
 
     override fun popLast() {
-        popViewModel(routes.last())
+        popEntry(routes.last())
         routes.removeLast()
         _routeStack.tryEmit(routes.last())
     }
@@ -31,7 +30,7 @@ private class AppNavigation(defaultRoute: Route) : Navigation {
 }
 
 interface Navigation {
-    val routeStack: SharedFlow<Route>
+    val routeStack: StateFlow<Route>
     fun navigate(route: Route)
     fun popLast()
 }
