@@ -1,8 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") version "1.6.10"
+    alias(libs.plugins.kotlin)
 }
 
 dependencies {
-    implementation("io.insert-koin:koin-core:3.1.5")
-    implementation("org.xerial:sqlite-jdbc:3.36.0.3")
+    implementation(libs.koin)
+    implementation(libs.sqlite)
 }

@@ -2,9 +2,14 @@ import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+/**
+ * Suppressing bug:
+ * https://youtrack.jetbrains.com/issue/KTIJ-19369
+ */
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") version "1.6.10"
-    id("org.jetbrains.compose") version "1.1.0"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.compose)
 }
 
 group = "me.zero"
@@ -14,7 +19,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":database"))
     implementation(compose.desktop.currentOs)
-    implementation("io.insert-koin:koin-core:3.1.5")
+    implementation(libs.koin)
 }
 
 compose.desktop {

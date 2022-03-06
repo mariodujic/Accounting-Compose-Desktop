@@ -1,9 +1,10 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") version "1.6.10"
-    id("org.jetbrains.compose") version "1.1.0"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.compose)
 }
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("io.insert-koin:koin-core:3.1.5")
+    implementation(libs.koin)
 }
