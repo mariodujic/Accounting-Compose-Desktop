@@ -12,6 +12,7 @@ version = "1.0"
 
 dependencies {
     implementation(project(":navigation"))
+    implementation(project(":database"))
     implementation(compose.desktop.currentOs)
     implementation("io.insert-koin:koin-core:3.1.5")
 }

@@ -1,2 +1,2 @@
 rootProject.name = "acc"
-include("app", "navigation")
+include("app", "navigation", "database")

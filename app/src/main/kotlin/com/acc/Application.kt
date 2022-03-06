@@ -5,20 +5,22 @@ import androidx.compose.ui.window.application
 import com.acc.features.home.di.homeModule
 import com.acc.features.main.ui.Main
 import com.acc.features.orgselection.di.organizationSelectionModule
+import com.database.databaseModule
 import org.koin.core.context.startKoin
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
-        initializeKoinDependencies()
+        addKoinModules()
         Main()
     }
 }
 
-private fun initializeKoinDependencies() {
+private fun addKoinModules() {
     startKoin {
         modules(
             organizationSelectionModule,
-            homeModule
+            homeModule,
+            databaseModule
         )
     }
 }
