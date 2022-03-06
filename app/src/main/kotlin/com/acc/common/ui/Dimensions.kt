@@ -1,4 +1,4 @@
-package com.acc.common.ui.theme
+package com.acc.common.ui
 
 import androidx.compose.ui.unit.dp
 

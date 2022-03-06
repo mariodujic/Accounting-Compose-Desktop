@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.acc.common.ui.Strings.backButton
 import com.navigation.HomeRoute
 import com.navigation.produce
 import com.acc.features.home.viewmodel.HomeViewModel
@@ -20,7 +21,7 @@ fun HomeScreen(navigateBack: () -> Unit) {
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().background(Color.LightGray)) {
         Button(onClick = navigateBack) {
-            Text(text = "Back")
+            Text(text = backButton)
         }
     }
 }

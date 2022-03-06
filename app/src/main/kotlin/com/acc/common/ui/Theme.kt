@@ -1,11 +1,10 @@
-package com.acc.common.ui.theme
+package com.acc.common.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import com.acc.common.ui.theme.*
 
 private val LightThemeColors = lightColors(
     primary = md_theme_light_primary,

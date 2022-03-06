@@ -8,11 +8,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.navigation.OrganizationRoute
-import com.acc.common.ui.theme.mediumPadding
-import com.acc.common.ui.theme.smallPadding
-import com.navigation.produce
+import com.acc.common.ui.Strings.select
+import com.acc.common.ui.mediumPadding
+import com.acc.common.ui.smallPadding
 import com.acc.features.orgselection.viewmodel.OrganizationSelectionViewModel
+import com.navigation.OrganizationRoute
+import com.navigation.produce
 
 @Composable
 fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
@@ -51,7 +52,7 @@ fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
                     }
                 }
                 Button(onClick = navigateHomeScreen, modifier = Modifier.fillMaxWidth()) {
-                    Text(text = "Select")
+                    Text(text = select)
                 }
             }
         }
