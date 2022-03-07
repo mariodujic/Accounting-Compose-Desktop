@@ -2,8 +2,11 @@ package com.navigation
 
 import org.koin.java.KoinJavaComponent
 
-val entryStore: MutableList<Store> = mutableListOf()
-val koin = KoinJavaComponent.getKoin()
+@PublishedApi
+internal val entryStore: MutableList<Store> = mutableListOf()
+
+@PublishedApi
+internal val koin = KoinJavaComponent.getKoin()
 
 inline fun <reified T : Entry> produce(route: Route): T {
     val classId = T::class.java.name
@@ -19,6 +22,6 @@ inline fun <reified T : Entry> produce(route: Route): T {
     return entryStore.first { it.classId == classId && it.route == route }.entry as T
 }
 
-fun popEntry(route: Route) {
+internal fun popEntry(route: Route) {
     entryStore.removeAll { it.route == route }
 }
