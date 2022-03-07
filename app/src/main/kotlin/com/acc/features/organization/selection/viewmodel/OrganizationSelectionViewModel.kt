@@ -1,4 +1,4 @@
-package com.acc.features.orgselection.viewmodel
+package com.acc.features.organization.selection.viewmodel
 
 import com.navigation.Entry
 import kotlinx.coroutines.flow.MutableStateFlow

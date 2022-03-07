@@ -1,5 +1,6 @@
 package com.navigation
 
 sealed interface Route
-object OrganizationRoute : Route
+object OrganizationSelectionRoute : Route
+object CreateOrganizationRoute : Route
 object HomeRoute : Route

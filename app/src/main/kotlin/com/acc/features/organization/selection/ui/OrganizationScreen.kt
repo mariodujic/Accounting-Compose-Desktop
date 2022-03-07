@@ -1,25 +1,32 @@
-package com.acc.features.orgselection.ui
+package com.acc.features.organization.selection.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.acc.common.ui.Strings.companySelectionLabel
+import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.enterButton
 import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
-import com.acc.features.orgselection.viewmodel.OrganizationSelectionViewModel
-import com.navigation.OrganizationRoute
+import com.acc.features.organization.selection.viewmodel.OrganizationSelectionViewModel
+import com.navigation.OrganizationSelectionRoute
 import com.navigation.produce
 
 @Composable
-fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
+fun OrganizationScreen(
+    navigateCreateOrganization: () -> Unit,
+    navigateHome: () -> Unit
+) {
 
-    val viewModel = produce<OrganizationSelectionViewModel>(OrganizationRoute)
+    val viewModel = produce<OrganizationSelectionViewModel>(OrganizationSelectionRoute)
     val selectedCompany by viewModel.selectedCompany.collectAsState()
 
     var showCompanies by remember { mutableStateOf(false) }
@@ -46,13 +53,24 @@ fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
                             onClick = { showCompanies = true },
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text(text = selectedCompany.name)
+                            Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                                Text(text = selectedCompany.name)
+                                Icon(
+                                    imageVector = if (showCompanies) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = ""
+                                )
+                            }
                         }
                         DropdownMenu(
                             expanded = showCompanies,
-                            onDismissRequest = { showCompanies = false },
-                            modifier = Modifier.width(200.dp)
+                            onDismissRequest = { showCompanies = false }
                         ) {
+                            Button(
+                                onClick = navigateCreateOrganization,
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = smallPadding)
+                            ) {
+                                Text(text = createOrganizationButton)
+                            }
                             viewModel.companies.forEach {
                                 DropdownMenuItem(onClick = {
                                     showCompanies = false
@@ -64,7 +82,7 @@ fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
                         }
                     }
                     Button(
-                        onClick = navigateHomeScreen,
+                        onClick = navigateHome,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(text = enterButton)
