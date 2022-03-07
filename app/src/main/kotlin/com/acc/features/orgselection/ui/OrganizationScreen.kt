@@ -8,7 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.acc.common.ui.Strings.select
+import com.acc.common.ui.Strings.companySelectionLabel
+import com.acc.common.ui.Strings.enterButton
 import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.orgselection.viewmodel.OrganizationSelectionViewModel
@@ -24,35 +25,50 @@ fun OrganizationScreen(navigateHomeScreen: () -> Unit) {
     var showCompanies by remember { mutableStateOf(false) }
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().background(Color.LightGray)) {
-        Card(modifier = Modifier.width(200.dp)) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(mediumPadding)
-            ) {
-                Text(
-                    text = selectedCompany.name,
-                    style = MaterialTheme.typography.h2
-                )
-                Spacer(modifier = Modifier.height(smallPadding))
-                Button(onClick = { showCompanies = true }, modifier = Modifier.fillMaxWidth()) {
-                    Text(text = "Switch company")
-                }
-                DropdownMenu(
-                    expanded = showCompanies,
-                    onDismissRequest = { showCompanies = false },
-                    modifier = Modifier.width(200.dp)
+        Card(modifier = Modifier.width(150.dp)) {
+            Column {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .background(MaterialTheme.colors.secondary)
                 ) {
-                    viewModel.companies.forEach {
-                        DropdownMenuItem(onClick = {
-                            showCompanies = false
-                            viewModel.selectCompany(it)
-                        }) {
-                            Text(text = it.name)
+                    Text(
+                        text = companySelectionLabel,
+                        color = MaterialTheme.colors.onSecondary,
+                        style = MaterialTheme.typography.h5
+                    )
+                }
+                Column(modifier = Modifier.padding(vertical = smallPadding, horizontal = mediumPadding)) {
+                    Box {
+                        OutlinedButton(
+                            onClick = { showCompanies = true },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(text = selectedCompany.name)
+                        }
+                        DropdownMenu(
+                            expanded = showCompanies,
+                            onDismissRequest = { showCompanies = false },
+                            modifier = Modifier.width(200.dp)
+                        ) {
+                            viewModel.companies.forEach {
+                                DropdownMenuItem(onClick = {
+                                    showCompanies = false
+                                    viewModel.selectCompany(it)
+                                }) {
+                                    Text(text = it.name)
+                                }
+                            }
                         }
                     }
-                }
-                Button(onClick = navigateHomeScreen, modifier = Modifier.fillMaxWidth()) {
-                    Text(text = select)
+                    Button(
+                        onClick = navigateHomeScreen,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(text = enterButton)
+                    }
                 }
             }
         }
