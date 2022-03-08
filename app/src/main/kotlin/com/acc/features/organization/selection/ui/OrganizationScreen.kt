@@ -9,8 +9,8 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.companySelectionLabel
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.enterButton
@@ -31,7 +31,12 @@ fun OrganizationScreen(
 
     var showCompanies by remember { mutableStateOf(false) }
 
-    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().background(Color.LightGray)) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+    ) {
         Card(modifier = Modifier.width(150.dp)) {
             Column {
                 Box(
@@ -55,10 +60,7 @@ fun OrganizationScreen(
                         ) {
                             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                                 Text(text = selectedCompany.name)
-                                Icon(
-                                    imageVector = if (showCompanies) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                    contentDescription = ""
-                                )
+                                AppIcon(imageVector = if (showCompanies) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown)
                             }
                         }
                         DropdownMenu(

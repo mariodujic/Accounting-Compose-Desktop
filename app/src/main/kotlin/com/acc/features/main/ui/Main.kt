@@ -27,7 +27,9 @@ fun Main() {
             is HomeRoute -> HomeScreen {
                 navigation.popLast()
             }
-            is CreateOrganizationRoute -> CreateOrganizationScreen()
+            is CreateOrganizationRoute -> CreateOrganizationScreen {
+                navigation.popLast()
+            }
         }
     }
 }

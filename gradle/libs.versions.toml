@@ -1,7 +1,7 @@
 [libraries]
-koin = { module="io.insert-koin:koin-core", version="3.1.5" }
-sqlite = { module="org.xerial:sqlite-jdbc", version="3.36.0.3" }
+koin = { module = "io.insert-koin:koin-core", version = "3.1.5" }
+sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.36.0.3" }
 
 [plugins]
-kotlin = { id="org.jetbrains.kotlin.jvm", version="1.6.10" }
-compose = { id="org.jetbrains.compose", version="1.1.0" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version = "1.6.10" }
+compose = { id = "org.jetbrains.compose", version = "1.1.0" }
