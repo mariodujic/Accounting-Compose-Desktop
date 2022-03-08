@@ -14,7 +14,7 @@ import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.companySelectionLabel
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.enterButton
-import com.acc.common.ui.mediumPadding
+import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.organization.selection.viewmodel.OrganizationSelectionViewModel
 import com.navigation.OrganizationSelectionRoute
@@ -52,7 +52,7 @@ fun OrganizationScreen(
                         style = MaterialTheme.typography.h5
                     )
                 }
-                Column(modifier = Modifier.padding(vertical = smallPadding, horizontal = mediumPadding)) {
+                Column(modifier = Modifier.padding(vertical = smallPadding, horizontal = largePadding)) {
                     Box {
                         OutlinedButton(
                             onClick = { showCompanies = true },

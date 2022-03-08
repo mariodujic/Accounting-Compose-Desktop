@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.createOrganizationToolbarTitle
-import com.acc.common.ui.mediumPadding
+import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.organization.create.state.rememberOrganizationState
 import com.acc.features.organization.create.viewmodel.CreateOrganizationViewModel
@@ -43,7 +43,7 @@ fun CreateOrganizationScreen(
             Card(modifier = Modifier.width(300.dp)) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(smallPadding),
-                    modifier = Modifier.padding(horizontal = mediumPadding, vertical = smallPadding)
+                    modifier = Modifier.padding(horizontal = largePadding, vertical = smallPadding)
                 ) {
                     CreateOrganizationField(
                         value = organization.id,
