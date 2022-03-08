@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -21,18 +22,16 @@ fun CreateOrganizationField(
 ) {
 
     var focused by remember { mutableStateOf(false) }
-
     Column {
         Text(
             text = label,
-            style = MaterialTheme.typography.subtitle1,
-            color = MaterialTheme.typography.subtitle1.color.copy(alpha = 0.4f)
+            style = MaterialTheme.typography.subtitle1
         )
         Spacer(modifier = Modifier.height(smallerPadding))
         BasicTextField(
             value = value,
             onValueChange = setValue,
-            textStyle = MaterialTheme.typography.body1,
+            textStyle = LocalTextStyle.current,
             modifier = Modifier
                 .fillMaxWidth()
                 .border(
