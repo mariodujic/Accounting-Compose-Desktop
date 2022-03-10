@@ -11,6 +11,10 @@ import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.createOrganizationToolbarTitle
+import com.acc.common.ui.Strings.organizationAddressLabel
+import com.acc.common.ui.Strings.organizationIdLabel
+import com.acc.common.ui.Strings.organizationNameLabel
+import com.acc.common.ui.Strings.organizationPostCodeLabel
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.organization.create.state.rememberOrganizationState
@@ -48,22 +52,22 @@ fun CreateOrganizationScreen(
                     CreateOrganizationField(
                         value = organization.id,
                         setValue = { organization.id = it },
-                        label = "Company ID"
+                        label = organizationIdLabel
                     )
                     CreateOrganizationField(
                         value = organization.name,
                         setValue = { organization.name = it },
-                        label = "Name"
+                        label = organizationNameLabel
                     )
                     CreateOrganizationField(
                         value = organization.postCode,
                         setValue = { organization.postCode = it },
-                        label = "Post code"
+                        label = organizationPostCodeLabel
                     )
                     CreateOrganizationField(
                         value = organization.address,
                         setValue = { organization.address = it },
-                        label = "Address"
+                        label = organizationAddressLabel
                     )
                     Row(
                         horizontalArrangement = Arrangement.End,

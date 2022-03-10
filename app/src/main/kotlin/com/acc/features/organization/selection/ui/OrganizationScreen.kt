@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
-import com.acc.common.ui.Strings.companySelectionLabel
+import com.acc.common.ui.Strings.organizationSelectionLabel
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.enterButton
 import com.acc.common.ui.largePadding
@@ -47,7 +47,7 @@ fun OrganizationScreen(
                         .background(MaterialTheme.colors.secondary)
                 ) {
                     Text(
-                        text = companySelectionLabel,
+                        text = organizationSelectionLabel,
                         color = MaterialTheme.colors.onSecondary,
                         style = MaterialTheme.typography.h5
                     )
