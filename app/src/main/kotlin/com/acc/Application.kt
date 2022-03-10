@@ -2,7 +2,7 @@ package com.acc
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.acc.features.home.di.homeModule
+import com.acc.features.home.presentation.di.homeModule
 import com.acc.features.main.ui.Main
 import com.acc.features.organization.di.organizationModule
 import com.database.databaseModule

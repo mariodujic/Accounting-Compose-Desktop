@@ -19,7 +19,7 @@ import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.organization.create.state.rememberOrganizationState
 import com.acc.features.organization.create.viewmodel.CreateOrganizationViewModel
-import com.navigation.CreateOrganizationRoute
+import com.acc.navigation.CreateOrganizationRoute
 import com.navigation.produce
 
 @Composable
