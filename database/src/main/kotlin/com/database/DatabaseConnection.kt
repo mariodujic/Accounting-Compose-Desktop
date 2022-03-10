@@ -25,8 +25,6 @@ class DatabaseConnection {
             connection = DriverManager.getConnection("jdbc:sqlite:$databasePath/$databaseFileName")
         } catch (e: Exception) {
             println(e)
-        } finally {
-            connection.close()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.acc.features.organization.create.state
+package com.acc.features.organization.create.presentation.state
 
 import androidx.compose.runtime.*
 
@@ -9,12 +9,12 @@ fun rememberOrganizationState(): CreateOrganizationState {
 
 class CreateOrganizationState {
 
-    var id by mutableStateOf("")
+    var organizationId by mutableStateOf("")
     var name by mutableStateOf("")
     var postCode by mutableStateOf("")
     var address by mutableStateOf("")
 
     val valid by derivedStateOf {
-        id.isNotEmpty() && name.isNotEmpty() && postCode.isNotEmpty() && address.isNotEmpty()
+        organizationId.isNotEmpty() && name.isNotEmpty() && postCode.isNotEmpty() && address.isNotEmpty()
     }
 }

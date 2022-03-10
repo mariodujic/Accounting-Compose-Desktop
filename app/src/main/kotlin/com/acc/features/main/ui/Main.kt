@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.acc.common.ui.AppTheme
 import com.acc.features.home.presentation.ui.HomeScreen
-import com.acc.features.organization.create.ui.CreateOrganizationScreen
+import com.acc.features.organization.create.presentation.ui.CreateOrganizationScreen
 import com.acc.features.organization.selection.ui.OrganizationScreen
 import com.acc.navigation.CreateOrganizationRoute
 import com.acc.navigation.HomeRoute

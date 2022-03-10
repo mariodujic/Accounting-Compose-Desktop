@@ -1,4 +1,4 @@
-package com.acc.features.organization.create.ui
+package com.acc.features.organization.create.presentation.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -17,8 +17,8 @@ import com.acc.common.ui.Strings.organizationNameLabel
 import com.acc.common.ui.Strings.organizationPostCodeLabel
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
-import com.acc.features.organization.create.state.rememberOrganizationState
-import com.acc.features.organization.create.viewmodel.CreateOrganizationViewModel
+import com.acc.features.organization.create.presentation.state.rememberOrganizationState
+import com.acc.features.organization.create.presentation.viewmodel.CreateOrganizationViewModel
 import com.acc.navigation.CreateOrganizationRoute
 import com.navigation.produce
 
@@ -50,8 +50,8 @@ fun CreateOrganizationScreen(
                     modifier = Modifier.padding(horizontal = largePadding, vertical = smallPadding)
                 ) {
                     CreateOrganizationField(
-                        value = organization.id,
-                        setValue = { organization.id = it },
+                        value = organization.organizationId,
+                        setValue = { organization.organizationId = it },
                         label = organizationIdLabel
                     )
                     CreateOrganizationField(
@@ -77,9 +77,9 @@ fun CreateOrganizationScreen(
                             enabled = organization.valid,
                             onClick = {
                                 viewModel.createOrganization(
-                                    id = organization.id,
+                                    organizationId = organization.organizationId,
                                     name = organization.name,
-                                    postalCode = organization.postCode,
+                                    postCode = organization.postCode,
                                     address = organization.address
                                 )
                             }

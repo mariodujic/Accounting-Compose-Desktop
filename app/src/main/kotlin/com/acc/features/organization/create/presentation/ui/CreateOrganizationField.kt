@@ -1,4 +1,4 @@
-package com.acc.features.organization.create.ui
+package com.acc.features.organization.create.presentation.ui
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
