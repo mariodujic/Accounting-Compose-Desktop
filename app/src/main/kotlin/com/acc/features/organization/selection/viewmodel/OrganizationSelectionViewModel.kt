@@ -9,11 +9,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-data class Company(
-    val name: String,
-    val selected: Boolean
-)
-
 class OrganizationSelectionViewModel(
     private val organizationRepository: OrganizationRepository,
     private val ioCoroutineScope: CoroutineScope
@@ -26,7 +21,7 @@ class OrganizationSelectionViewModel(
             emptyList()
         )
 
-    val selectedCompany = organizations.map {
+    val selectedOrganization = organizations.map {
         it.firstOrNull { organization -> organization.selected }
     }.stateIn(
         ioCoroutineScope,
