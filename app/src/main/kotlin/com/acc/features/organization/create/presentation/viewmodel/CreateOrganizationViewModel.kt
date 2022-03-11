@@ -1,13 +1,13 @@
 package com.acc.features.organization.create.presentation.viewmodel
 
-import com.acc.features.organization.create.data.repository.CreateOrganizationRepository
+import com.acc.features.organization.data.repository.OrganizationRepository
 import com.acc.features.organization.model.Organization
 import com.navigation.Entry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class CreateOrganizationViewModel(
-    private val repository: CreateOrganizationRepository,
+    private val repository: OrganizationRepository,
     private val ioCoroutineScope: CoroutineScope
 ) : Entry {
 

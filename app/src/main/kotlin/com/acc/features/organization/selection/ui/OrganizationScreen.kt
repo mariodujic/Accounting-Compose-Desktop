@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.enterButton
+import com.acc.common.ui.Strings.noOrganizationSelected
 import com.acc.common.ui.Strings.organizationSelectionLabel
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
@@ -27,7 +28,8 @@ fun OrganizationScreen(
 ) {
 
     val viewModel = produce<OrganizationSelectionViewModel>(OrganizationSelectionRoute)
-    val selectedCompany by viewModel.selectedCompany.collectAsState()
+    val selectedOrganization by viewModel.selectedCompany.collectAsState()
+    val organizations by viewModel.organizations.collectAsState()
 
     var showCompanies by remember { mutableStateOf(false) }
 
@@ -59,7 +61,7 @@ fun OrganizationScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                                Text(text = selectedCompany.name)
+                                Text(text = selectedOrganization?.name ?: noOrganizationSelected)
                                 AppIcon(imageVector = if (showCompanies) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown)
                             }
                         }
@@ -73,7 +75,7 @@ fun OrganizationScreen(
                             ) {
                                 Text(text = createOrganizationButton)
                             }
-                            viewModel.companies.forEach {
+                            organizations.forEach {
                                 DropdownMenuItem(onClick = {
                                     showCompanies = false
                                     viewModel.selectCompany(it)

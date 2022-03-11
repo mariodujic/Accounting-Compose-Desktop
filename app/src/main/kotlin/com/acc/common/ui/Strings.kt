@@ -7,6 +7,7 @@ object Strings {
     /*Organization selection*/
     const val organizationSelectionLabel = "Organization"
     const val enterButton = "Enter"
+    const val noOrganizationSelected = "Select"
 
     /*Create organization*/
     const val createOrganizationButton = "Create"

@@ -5,5 +5,6 @@ data class Organization(
     val organizationId: String = "",
     val name: String = "",
     val postCode: String = "",
-    val address: String = ""
+    val address: String = "",
+    val selected: Boolean = false
 )
