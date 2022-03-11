@@ -1,12 +1,15 @@
 package com.navigation
 
+import org.koin.core.Koin
 import org.koin.java.KoinJavaComponent
 
 @PublishedApi
 internal val entryStore: MutableList<Store> = mutableListOf()
 
 @PublishedApi
-internal val koin = KoinJavaComponent.getKoin()
+internal val koin: Koin by lazy {
+    KoinJavaComponent.getKoin()
+}
 
 inline fun <reified T : Entry> produce(route: Route): T {
     val classId = T::class.java.name

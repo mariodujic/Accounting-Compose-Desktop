@@ -7,4 +7,5 @@ plugins {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation(libs.koin)
+    implementation(libs.junit)
 }
