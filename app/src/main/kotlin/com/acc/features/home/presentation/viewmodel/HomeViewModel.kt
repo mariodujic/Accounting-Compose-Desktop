@@ -16,7 +16,7 @@ class HomeViewModel(
         it.firstOrNull { organization -> organization.selected }?.name.orEmpty()
     }.stateIn(
         ioCoroutineScope,
-        SharingStarted.Lazily,
-        "null"
+        SharingStarted.WhileSubscribed(1000),
+        ""
     )
 }

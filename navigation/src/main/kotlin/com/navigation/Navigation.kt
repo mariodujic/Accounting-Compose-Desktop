@@ -1,13 +1,13 @@
 package com.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun rememberNavigation(defaultRoute: Route): Navigation {
-    return remember { AppNavigation(defaultRoute = defaultRoute) }
+    return rememberSaveable { AppNavigation(defaultRoute = defaultRoute) }
 }
 
 private class AppNavigation(defaultRoute: Route) : Navigation {
