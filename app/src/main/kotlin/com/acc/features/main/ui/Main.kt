@@ -7,9 +7,11 @@ import com.acc.common.ui.AppTheme
 import com.acc.features.home.presentation.ui.HomeScreen
 import com.acc.features.organization.create.presentation.ui.CreateOrganizationScreen
 import com.acc.features.organization.selection.ui.OrganizationScreen
+import com.acc.features.settings.presentation.ui.SettingsScreen
 import com.acc.navigation.CreateOrganizationRoute
 import com.acc.navigation.HomeRoute
 import com.acc.navigation.OrganizationSelectionRoute
+import com.acc.navigation.SettingsRoute
 import com.navigation.rememberNavigation
 
 @Composable
@@ -24,10 +26,14 @@ fun Main() {
                 navigateCreateOrganization = { navigation.navigate(CreateOrganizationRoute) },
                 navigateHome = { navigation.navigate(HomeRoute) }
             )
-            is HomeRoute -> HomeScreen {
+            is HomeRoute -> HomeScreen(
+                navigateSettings = { navigation.navigate(SettingsRoute) },
+                navigateBack = navigation::popLast
+            )
+            is CreateOrganizationRoute -> CreateOrganizationScreen {
                 navigation.popLast()
             }
-            is CreateOrganizationRoute -> CreateOrganizationScreen {
+            is SettingsRoute -> SettingsScreen {
                 navigation.popLast()
             }
         }

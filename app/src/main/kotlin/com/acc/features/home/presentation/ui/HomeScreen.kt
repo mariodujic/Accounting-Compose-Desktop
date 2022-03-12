@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
@@ -29,6 +30,7 @@ import com.navigation.rememberNavigation
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = produce(HomeRoute),
+    navigateSettings: () -> Unit,
     navigateBack: () -> Unit
 ) {
 
@@ -43,6 +45,9 @@ fun HomeScreen(
                 title = { Text(text = toolbarTitle, style = MaterialTheme.typography.h3) },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
+                },
+                actions = {
+                    IconButton(onClick = navigateSettings) { AppIcon(imageVector = Icons.Default.Settings) }
                 }
             )
         }
