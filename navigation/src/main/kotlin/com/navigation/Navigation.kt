@@ -26,7 +26,6 @@ private class AppNavigation(defaultRoute: Route) : Navigation {
         routes.removeLast()
         _routeStack.tryEmit(routes.last())
     }
-
 }
 
 interface Navigation {

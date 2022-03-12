@@ -3,6 +3,7 @@ package com.acc.features.main.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import com.acc.common.ui.AppTheme
 import com.acc.features.home.presentation.ui.HomeScreen
 import com.acc.features.organization.create.presentation.ui.CreateOrganizationScreen
@@ -17,19 +18,27 @@ import com.navigation.rememberNavigation
 @Composable
 fun Main() {
 
+    val stateHolder = rememberSaveableStateHolder()
     val navigation = rememberNavigation(defaultRoute = OrganizationSelectionRoute)
     val route by navigation.routeStack.collectAsState()
 
     AppTheme(useDarkTheme = false) {
         when (route) {
-            is OrganizationSelectionRoute -> OrganizationScreen(
-                navigateCreateOrganization = { navigation.navigate(CreateOrganizationRoute) },
-                navigateHome = { navigation.navigate(HomeRoute) }
-            )
-            is HomeRoute -> HomeScreen(
-                navigateSettings = { navigation.navigate(SettingsRoute) },
-                navigateBack = navigation::popLast
-            )
+            is OrganizationSelectionRoute -> {
+                stateHolder.removeState(Unit)
+                OrganizationScreen(
+                    navigateCreateOrganization = { navigation.navigate(CreateOrganizationRoute) },
+                    navigateHome = { navigation.navigate(HomeRoute) }
+                )
+            }
+            is HomeRoute -> {
+                stateHolder.SaveableStateProvider(Unit) {
+                    HomeScreen(
+                        navigateSettings = { navigation.navigate(SettingsRoute) },
+                        navigateBack = navigation::popLast
+                    )
+                }
+            }
             is CreateOrganizationRoute -> CreateOrganizationScreen {
                 navigation.popLast()
             }
