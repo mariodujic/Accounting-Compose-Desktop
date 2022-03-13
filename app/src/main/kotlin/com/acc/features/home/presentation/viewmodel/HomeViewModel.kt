@@ -12,8 +12,8 @@ class HomeViewModel(
     ioCoroutineScope: CoroutineScope
 ) : Entry {
 
-    val selectedOrganizationName = organizationRepository.getOrganizations().map {
-        it.firstOrNull { organization -> organization.selected }?.name.orEmpty()
+    val selectedOrganizationName = organizationRepository.getSelectedOrganization().map {
+        it?.name.orEmpty()
     }.stateIn(
         ioCoroutineScope,
         SharingStarted.WhileSubscribed(1000),

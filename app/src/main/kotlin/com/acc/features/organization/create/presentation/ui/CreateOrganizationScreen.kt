@@ -5,18 +5,23 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.createOrganizationButton
+import com.acc.common.ui.Strings.createOrganizationIdError
 import com.acc.common.ui.Strings.createOrganizationToolbarTitle
 import com.acc.common.ui.Strings.organizationAddressLabel
 import com.acc.common.ui.Strings.organizationIdLabel
 import com.acc.common.ui.Strings.organizationNameLabel
 import com.acc.common.ui.Strings.organizationPostCodeLabel
+import com.acc.common.ui.error
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
+import com.acc.features.organization.create.presentation.result.CreateOrganizationResult
 import com.acc.features.organization.create.presentation.state.rememberOrganizationState
 import com.acc.features.organization.create.presentation.viewmodel.CreateOrganizationViewModel
 import com.acc.navigation.CreateOrganizationRoute
@@ -29,6 +34,10 @@ fun CreateOrganizationScreen(
 ) {
 
     val organization = rememberOrganizationState()
+    val result by viewModel.result.collectAsState()
+    if (result == CreateOrganizationResult.SUCCESS) {
+        navigateBack()
+    }
 
     Scaffold(
         topBar = {
@@ -54,6 +63,9 @@ fun CreateOrganizationScreen(
                         setValue = { organization.organizationId = it },
                         label = organizationIdLabel
                     )
+                    if (result == CreateOrganizationResult.ERROR) {
+                        Text(text = createOrganizationIdError, color = error)
+                    }
                     CreateOrganizationField(
                         value = organization.name,
                         setValue = { organization.name = it },

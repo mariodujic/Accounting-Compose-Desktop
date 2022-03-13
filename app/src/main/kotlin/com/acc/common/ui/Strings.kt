@@ -12,6 +12,7 @@ object Strings {
     /*Create organization*/
     const val createOrganizationButton = "Create"
     const val createOrganizationToolbarTitle = "Create Organization"
+    const val createOrganizationIdError = "Organization ID already exists."
     const val organizationIdLabel = "Organization ID"
     const val organizationNameLabel = "Name"
     const val organizationPostCodeLabel = "Post code"
