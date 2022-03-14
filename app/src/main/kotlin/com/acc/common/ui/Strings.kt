@@ -25,4 +25,5 @@ object Strings {
 
     /*Settings*/
     const val settingsToolbarTitle = "Settings"
+    const val settingsDarkThemeButton = "Dark theme"
 }

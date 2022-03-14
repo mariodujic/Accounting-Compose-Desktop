@@ -2,6 +2,7 @@
 koin = { module = "io.insert-koin:koin-core", version = "3.1.5" }
 sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.36.0.3" }
 junit = { module = "org.junit.jupiter:junit-jupiter-engine", version = "5.8.1" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.0" }
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version = "1.6.10" }
