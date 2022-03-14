@@ -1,4 +1,4 @@
-package com.acc.utils
+package com.utils
 
 import java.util.*
 

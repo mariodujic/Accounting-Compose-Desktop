@@ -18,6 +18,7 @@ version = "1.0"
 dependencies {
     implementation(project(":navigation"))
     implementation(project(":database"))
+    implementation(project(":utils"))
     implementation(compose.desktop.currentOs)
     implementation(libs.koin)
 }

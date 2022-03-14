@@ -1,7 +1,7 @@
 package com.acc.features.organization.data.local.dao
 
 import com.acc.features.organization.model.Organization
-import com.acc.utils.UuidUtils
+import com.utils.UuidUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.map
