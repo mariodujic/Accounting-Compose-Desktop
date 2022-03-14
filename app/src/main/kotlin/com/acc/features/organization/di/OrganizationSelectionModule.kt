@@ -1,9 +1,9 @@
 package com.acc.features.organization.di
 
+import com.acc.features.organization.create.presentation.viewmodel.CreateOrganizationViewModel
 import com.acc.features.organization.data.local.dao.OrganizationDao
 import com.acc.features.organization.data.local.dao.OrganizationDaoImpl
 import com.acc.features.organization.data.repository.OrganizationRepository
-import com.acc.features.organization.create.presentation.viewmodel.CreateOrganizationViewModel
 import com.acc.features.organization.selection.viewmodel.OrganizationSelectionViewModel
 import org.koin.dsl.module
 

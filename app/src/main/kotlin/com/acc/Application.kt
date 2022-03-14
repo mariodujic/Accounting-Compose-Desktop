@@ -7,6 +7,7 @@ import com.acc.features.home.presentation.di.homeModule
 import com.acc.features.main.ui.Main
 import com.acc.features.organization.di.organizationModule
 import com.database.databaseModule
+import com.preferences.preferencesModule
 import com.utils.utilsModule
 import org.koin.core.context.startKoin
 
@@ -24,7 +25,8 @@ private fun addKoinModules() {
             homeModule,
             databaseModule,
             utilsModule,
-            coroutinesModule
+            coroutinesModule,
+            preferencesModule
         )
     }
 }

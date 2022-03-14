@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":database"))
     implementation(project(":utils"))
+    implementation(project(":preferences"))
     implementation(compose.desktop.currentOs)
     implementation(libs.koin)
 }
