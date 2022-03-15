@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.features.home.dashboard.DashboardScreen
-import com.acc.features.home.expenses.ExpensesScreen
+import com.acc.features.home.expenses.list.presentation.ui.ExpensesScreen
 import com.acc.features.home.navigation.Dashboard
 import com.acc.features.home.navigation.Expenses
 import com.acc.features.home.navigation.Sales
@@ -30,6 +30,7 @@ import com.navigation.rememberNavigation
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = produce(HomeRoute),
+    navigateAddExpense: () -> Unit,
     navigateSettings: () -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -65,7 +66,7 @@ fun HomeScreen(
                 HomeContent(modifier = Modifier.weight(3f)) {
                     when (route) {
                         is Dashboard -> DashboardScreen()
-                        is Expenses -> ExpensesScreen()
+                        is Expenses -> ExpensesScreen(navigateAddExpense = navigateAddExpense)
                         is Sales -> SalesScreen()
                     }
                 }

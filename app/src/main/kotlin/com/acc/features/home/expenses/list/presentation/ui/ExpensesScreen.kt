@@ -1,4 +1,4 @@
-package com.acc.features.home.expenses
+package com.acc.features.home.expenses.list.presentation.ui
 
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import com.acc.common.components.AppIcon
 
 @Composable
-fun ExpensesScreen() {
+fun ExpensesScreen(navigateAddExpense: () -> Unit) {
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = {}) {
+            FloatingActionButton(onClick = navigateAddExpense) {
                 AppIcon(imageVector = Icons.Default.Add)
             }
         }

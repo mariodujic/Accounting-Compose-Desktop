@@ -4,9 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
-import com.acc.common.ui.AppTheme
-import com.acc.features.home.presentation.ui.HomeScreen
 import com.acc.common.theme.viewmodel.ThemeViewModel
+import com.acc.common.ui.AppTheme
+import com.acc.features.home.expenses.add.presentation.ui.AddExpenseScreen
+import com.acc.features.home.presentation.ui.HomeScreen
 import com.acc.features.organization.create.presentation.ui.CreateOrganizationScreen
 import com.acc.features.organization.selection.ui.OrganizationScreen
 import com.acc.features.settings.presentation.ui.SettingsScreen
@@ -36,11 +37,13 @@ fun Main() {
             is HomeRoute -> {
                 stateHolder.SaveableStateProvider(Unit) {
                     HomeScreen(
+                        navigateAddExpense = { navigation.navigate(AddExpenseRoute) },
                         navigateSettings = { navigation.navigate(SettingsRoute) },
                         navigateBack = navigation::popLast
                     )
                 }
             }
+            is AddExpenseRoute -> AddExpenseScreen(navigateBack = navigation::popLast)
             is CreateOrganizationRoute -> CreateOrganizationScreen {
                 navigation.popLast()
             }

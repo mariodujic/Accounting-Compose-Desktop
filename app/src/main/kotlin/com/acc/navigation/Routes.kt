@@ -6,4 +6,5 @@ object Root: Route
 object OrganizationSelectionRoute : Route
 object CreateOrganizationRoute : Route
 object HomeRoute : Route
+object AddExpenseRoute : Route
 object SettingsRoute : Route

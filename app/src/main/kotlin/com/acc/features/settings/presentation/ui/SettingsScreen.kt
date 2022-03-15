@@ -11,10 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
+import com.acc.common.theme.viewmodel.ThemeViewModel
 import com.acc.common.ui.Strings.settingsDarkThemeButton
 import com.acc.common.ui.Strings.settingsToolbarTitle
 import com.acc.common.ui.mediumPadding
-import com.acc.common.theme.viewmodel.ThemeViewModel
+import com.acc.common.ui.smallPadding
 import com.acc.navigation.Root
 import com.navigation.produce
 
@@ -42,7 +43,7 @@ fun SettingsScreen(navigateBack: () -> Unit) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(50.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(mediumPadding)
+                    modifier = Modifier.padding(horizontal = mediumPadding, vertical = smallPadding)
                 ) {
                     Text(text = settingsDarkThemeButton)
                     Checkbox(

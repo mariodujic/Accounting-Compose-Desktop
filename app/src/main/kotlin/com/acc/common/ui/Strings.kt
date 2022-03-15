@@ -23,6 +23,9 @@ object Strings {
     const val homeNavigationExpensesButton = "Expenses"
     const val homeNavigationSalesButton = "Sales"
 
+    /*Add expense*/
+    const val addExpenseToolbarTitle = "Add expense"
+
     /*Settings*/
     const val settingsToolbarTitle = "Settings"
     const val settingsDarkThemeButton = "Dark theme"
