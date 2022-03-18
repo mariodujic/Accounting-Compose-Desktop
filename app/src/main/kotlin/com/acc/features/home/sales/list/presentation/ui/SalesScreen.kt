@@ -1,4 +1,4 @@
-package com.acc.features.home.sales
+package com.acc.features.home.sales.list.presentation.ui
 
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import com.acc.common.components.AppIcon
 
 @Composable
-fun SalesScreen() {
+fun SalesScreen(navigateAddSales: () -> Unit) {
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = {}) {
+            FloatingActionButton(onClick = navigateAddSales) {
                 AppIcon(imageVector = Icons.Default.Add)
             }
         }

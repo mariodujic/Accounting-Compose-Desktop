@@ -7,4 +7,5 @@ object OrganizationSelectionRoute : Route
 object CreateOrganizationRoute : Route
 object HomeRoute : Route
 object AddExpenseRoute : Route
+object AddSalesRoute : Route
 object SettingsRoute : Route

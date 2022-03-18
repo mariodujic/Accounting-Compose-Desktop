@@ -8,6 +8,7 @@ import com.acc.common.theme.viewmodel.ThemeViewModel
 import com.acc.common.ui.AppTheme
 import com.acc.features.home.expenses.add.presentation.ui.AddExpenseScreen
 import com.acc.features.home.presentation.ui.HomeScreen
+import com.acc.features.home.sales.add.presentation.ui.AddSalesScreen
 import com.acc.features.organization.create.presentation.ui.CreateOrganizationScreen
 import com.acc.features.organization.selection.ui.OrganizationScreen
 import com.acc.features.settings.presentation.ui.SettingsScreen
@@ -38,12 +39,14 @@ fun Main() {
                 stateHolder.SaveableStateProvider(Unit) {
                     HomeScreen(
                         navigateAddExpense = { navigation.navigate(AddExpenseRoute) },
+                        navigateAddSales = { navigation.navigate(AddSalesRoute) },
                         navigateSettings = { navigation.navigate(SettingsRoute) },
                         navigateBack = navigation::popLast
                     )
                 }
             }
             is AddExpenseRoute -> AddExpenseScreen(navigateBack = navigation::popLast)
+            is AddSalesRoute -> AddSalesScreen(navigateBack = navigation::popLast)
             is CreateOrganizationRoute -> CreateOrganizationScreen {
                 navigation.popLast()
             }

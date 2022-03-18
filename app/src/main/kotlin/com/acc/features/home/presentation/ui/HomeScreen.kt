@@ -22,7 +22,7 @@ import com.acc.features.home.navigation.Dashboard
 import com.acc.features.home.navigation.Expenses
 import com.acc.features.home.navigation.Sales
 import com.acc.features.home.presentation.viewmodel.HomeViewModel
-import com.acc.features.home.sales.SalesScreen
+import com.acc.features.home.sales.list.presentation.ui.SalesScreen
 import com.acc.navigation.HomeRoute
 import com.navigation.produce
 import com.navigation.rememberNavigation
@@ -31,6 +31,7 @@ import com.navigation.rememberNavigation
 fun HomeScreen(
     viewModel: HomeViewModel = produce(HomeRoute),
     navigateAddExpense: () -> Unit,
+    navigateAddSales: () -> Unit,
     navigateSettings: () -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -67,7 +68,7 @@ fun HomeScreen(
                     when (route) {
                         is Dashboard -> DashboardScreen()
                         is Expenses -> ExpensesScreen(navigateAddExpense = navigateAddExpense)
-                        is Sales -> SalesScreen()
+                        is Sales -> SalesScreen(navigateAddSales = navigateAddSales)
                     }
                 }
             }
