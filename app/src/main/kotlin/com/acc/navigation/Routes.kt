@@ -8,4 +8,5 @@ object CreateOrganizationRoute : Route
 object HomeRoute : Route
 object AddExpenseRoute : Route
 object AddSalesRoute : Route
+object AddChartOfAccountRoute : Route
 object SettingsRoute : Route

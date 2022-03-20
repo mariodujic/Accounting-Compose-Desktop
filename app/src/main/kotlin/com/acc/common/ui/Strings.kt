@@ -22,12 +22,16 @@ object Strings {
     const val homeNavigationDashboardButton = "Dashboard"
     const val homeNavigationExpensesButton = "Expenses"
     const val homeNavigationSalesButton = "Sales"
+    const val homeNavigationCharOfAccountsButton = "Chart of Accounts"
 
     /*Add expense*/
     const val addExpenseToolbarTitle = "Add expense"
 
     /*Add sales*/
     const val addSalesToolbarTitle = "Add sales"
+
+    /*Add CoA*/
+    const val addAccountToolbarTitle = "Add account"
 
     /*Settings*/
     const val settingsToolbarTitle = "Settings"

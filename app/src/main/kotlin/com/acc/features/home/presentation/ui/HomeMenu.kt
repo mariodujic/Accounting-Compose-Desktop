@@ -9,10 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.acc.common.ui.Strings.homeNavigationCharOfAccountsButton
 import com.acc.common.ui.Strings.homeNavigationDashboardButton
 import com.acc.common.ui.Strings.homeNavigationExpensesButton
 import com.acc.common.ui.Strings.homeNavigationSalesButton
 import com.acc.common.ui.smallPadding
+import com.acc.features.home.navigation.CharOfAccounts
 import com.acc.features.home.navigation.Dashboard
 import com.acc.features.home.navigation.Expenses
 import com.acc.features.home.navigation.Sales
@@ -24,6 +26,7 @@ fun HomeMenu(
     navigateDashboard: () -> Unit,
     navigateExpenses: () -> Unit,
     navigateSales: () -> Unit,
+    navigateCharOfAccounts: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -46,6 +49,11 @@ fun HomeMenu(
                 text = homeNavigationSalesButton,
                 selected = currentRoute is Sales,
                 onClick = navigateSales
+            )
+            HomeMenuButton(
+                text = homeNavigationCharOfAccountsButton,
+                selected = currentRoute is CharOfAccounts,
+                onClick = navigateCharOfAccounts
             )
         }
     }

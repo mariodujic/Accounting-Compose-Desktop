@@ -16,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
+import com.acc.features.home.chartofaccounts.list.presentation.ui.ChartOfAccountsScreen
 import com.acc.features.home.dashboard.DashboardScreen
 import com.acc.features.home.expenses.list.presentation.ui.ExpensesScreen
+import com.acc.features.home.navigation.CharOfAccounts
 import com.acc.features.home.navigation.Dashboard
 import com.acc.features.home.navigation.Expenses
 import com.acc.features.home.navigation.Sales
@@ -32,6 +34,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = produce(HomeRoute),
     navigateAddExpense: () -> Unit,
     navigateAddSales: () -> Unit,
+    navigateAddAccount: () -> Unit,
     navigateSettings: () -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -62,6 +65,7 @@ fun HomeScreen(
                     navigateDashboard = { homeNavigation.navigate(Dashboard) },
                     navigateExpenses = { homeNavigation.navigate(Expenses) },
                     navigateSales = { homeNavigation.navigate(Sales) },
+                    navigateCharOfAccounts = { homeNavigation.navigate(CharOfAccounts) },
                     modifier = Modifier.menuWidth(screenWidth.dp)
                 )
                 HomeContent(modifier = Modifier.weight(3f)) {
@@ -69,6 +73,7 @@ fun HomeScreen(
                         is Dashboard -> DashboardScreen()
                         is Expenses -> ExpensesScreen(navigateAddExpense = navigateAddExpense)
                         is Sales -> SalesScreen(navigateAddSales = navigateAddSales)
+                        is CharOfAccounts -> ChartOfAccountsScreen(navigateAddAccount = navigateAddAccount)
                     }
                 }
             }
