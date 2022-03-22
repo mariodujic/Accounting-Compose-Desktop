@@ -26,10 +26,20 @@ private class AppNavigation(defaultRoute: Route) : Navigation {
         routes.removeLast()
         _routeStack.tryEmit(routes.last())
     }
+
+    override fun popTo(route: Route) {
+        if (!routes.contains(route)) throw IllegalStateException("$route route missing.")
+        while (routes.last() != route) {
+            popEntry(routes.last())
+            routes.removeLast()
+            _routeStack.tryEmit(routes.last())
+        }
+    }
 }
 
 interface Navigation {
     val routeStack: StateFlow<Route>
     fun navigate(route: Route)
     fun popLast()
+    fun popTo(route: Route)
 }
