@@ -10,7 +10,7 @@ fun rememberNavigation(defaultRoute: Route): Navigation {
     return rememberSaveable { AppNavigation(defaultRoute = defaultRoute) }
 }
 
-private class AppNavigation(defaultRoute: Route) : Navigation {
+internal class AppNavigation(defaultRoute: Route) : Navigation {
 
     private val routes: MutableList<Route> = mutableListOf(defaultRoute)
     private val _routeStack: MutableStateFlow<Route> = MutableStateFlow(defaultRoute)
