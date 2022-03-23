@@ -29,6 +29,14 @@ class OrganizationSelectionViewModel(
         null
     )
 
+    val hasSelectedOrganization = selectedOrganization.map {
+        it != null
+    }.stateIn(
+        ioCoroutineScope,
+        SharingStarted.Lazily,
+        false
+    )
+
     fun selectCompany(organization: Organization) {
         ioCoroutineScope.launch {
             organizationRepository.selectOrganization(organizationId = organization.organizationId)

@@ -29,6 +29,7 @@ fun OrganizationScreen(
 
     val viewModel = produce<OrganizationSelectionViewModel>(OrganizationSelectionRoute)
     val selectedOrganization by viewModel.selectedOrganization.collectAsState()
+    val hasSelectedOrganization by viewModel.hasSelectedOrganization.collectAsState()
     val organizations by viewModel.organizations.collectAsState()
 
     var showCompanies by remember { mutableStateOf(false) }
@@ -87,6 +88,7 @@ fun OrganizationScreen(
                     }
                     Button(
                         onClick = navigateHome,
+                        enabled = hasSelectedOrganization,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(text = enterButton)
