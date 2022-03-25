@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
+import com.acc.common.components.AppTextField
 import com.acc.common.ui.Strings.createOrganizationButton
 import com.acc.common.ui.Strings.createOrganizationIdError
 import com.acc.common.ui.Strings.createOrganizationToolbarTitle
@@ -58,7 +59,7 @@ fun CreateOrganizationScreen(
                     verticalArrangement = Arrangement.spacedBy(smallPadding),
                     modifier = Modifier.padding(horizontal = largePadding, vertical = smallPadding)
                 ) {
-                    CreateOrganizationField(
+                    AppTextField(
                         value = organization.organizationId,
                         setValue = { organization.organizationId = it },
                         label = organizationIdLabel
@@ -66,17 +67,17 @@ fun CreateOrganizationScreen(
                     if (result == CreateOrganizationResult.ERROR) {
                         Text(text = createOrganizationIdError, color = error)
                     }
-                    CreateOrganizationField(
+                    AppTextField(
                         value = organization.name,
                         setValue = { organization.name = it },
                         label = organizationNameLabel
                     )
-                    CreateOrganizationField(
+                    AppTextField(
                         value = organization.postCode,
                         setValue = { organization.postCode = it },
                         label = organizationPostCodeLabel
                     )
-                    CreateOrganizationField(
+                    AppTextField(
                         value = organization.address,
                         setValue = { organization.address = it },
                         label = organizationAddressLabel

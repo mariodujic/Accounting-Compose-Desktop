@@ -32,6 +32,8 @@ object Strings {
 
     /*Add CoA*/
     const val addAccountToolbarTitle = "Add account"
+    const val addAccountNumberLabel = "Number"
+    const val addAccountDescriptionLabel = "Description"
 
     /*Settings*/
     const val settingsToolbarTitle = "Settings"

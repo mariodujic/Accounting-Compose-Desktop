@@ -1,4 +1,4 @@
-package com.acc.features.organization.create.presentation.ui
+package com.acc.common.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,7 @@ import com.acc.common.ui.smallPadding
 import com.acc.common.ui.smallerPadding
 
 @Composable
-fun CreateOrganizationField(
+fun AppTextField(
     value: String,
     setValue: (String) -> Unit,
     label: String
