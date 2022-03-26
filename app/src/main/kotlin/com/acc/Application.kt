@@ -3,8 +3,9 @@ package com.acc
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.acc.common.di.coroutinesModule
-import com.acc.features.home.presentation.di.homeModule
 import com.acc.common.theme.di.themeModule
+import com.acc.features.home.chartofaccounts.di.chartOfAccountsModule
+import com.acc.features.home.presentation.di.homeModule
 import com.acc.features.main.ui.Main
 import com.acc.features.organization.di.organizationModule
 import com.database.databaseModule
@@ -28,7 +29,8 @@ private fun addKoinModules() {
             utilsModule,
             coroutinesModule,
             preferencesModule,
-            themeModule
+            themeModule,
+            chartOfAccountsModule
         )
     }
 }

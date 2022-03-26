@@ -34,6 +34,7 @@ object Strings {
     const val addAccountToolbarTitle = "Add account"
     const val addAccountNumberLabel = "Number"
     const val addAccountDescriptionLabel = "Description"
+    const val addAccount = "Add Account"
 
     /*Settings*/
     const val settingsToolbarTitle = "Settings"

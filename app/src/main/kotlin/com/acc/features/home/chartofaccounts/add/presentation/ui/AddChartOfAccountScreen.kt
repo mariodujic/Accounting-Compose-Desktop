@@ -4,23 +4,33 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.components.AppTextField
 import com.acc.common.ui.Strings
+import com.acc.common.ui.Strings.addAccount
 import com.acc.common.ui.Strings.addAccountDescriptionLabel
 import com.acc.common.ui.Strings.addAccountNumberLabel
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
+import com.acc.features.home.chartofaccounts.add.presentation.viewmodel.AddChartOfAccountsViewModel
+import com.acc.navigation.AddChartOfAccountRoute
+import com.navigation.produce
 
 @Composable
-fun AddChartOfAccountScreen(navigateBack: () -> Unit) {
+fun AddChartOfAccountScreen(
+    viewModel: AddChartOfAccountsViewModel = produce(AddChartOfAccountRoute),
+    navigateBack: () -> Unit
+) {
 
-    var accountNumber by remember { mutableStateOf("") }
-    var accountDescription by remember { mutableStateOf("") }
+    val accountNumber by viewModel.accountNumber.collectAsState()
+    val accountDescription by viewModel.accountDescription.collectAsState()
+    val accountValid by viewModel.accountValid.collectAsState(initial = false)
 
     Scaffold(
         topBar = {
@@ -40,14 +50,25 @@ fun AddChartOfAccountScreen(navigateBack: () -> Unit) {
                 ) {
                     AppTextField(
                         value = accountNumber,
-                        setValue = { accountNumber = it },
+                        setValue = { viewModel.setAccountNumber(it) },
                         label = addAccountNumberLabel
                     )
                     AppTextField(
                         value = accountDescription,
-                        setValue = { accountDescription = it },
+                        setValue = { viewModel.setAccountDescription(it) },
                         label = addAccountDescriptionLabel
                     )
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Button(
+                            enabled = accountValid,
+                            onClick = {}
+                        ) {
+                            Text(text = addAccount)
+                        }
+                    }
                 }
             }
         }
