@@ -24,7 +24,7 @@ internal class AppNavigation(defaultRoute: Route) : Navigation {
     override fun popLast() {
         popEntry(routes.last())
         routes.removeLast()
-        _routeStack.tryEmit(routes.last())
+        if (routes.isNotEmpty()) _routeStack.tryEmit(routes.last())
     }
 
     override fun popTo(route: Route) {

@@ -6,6 +6,7 @@ import com.navigation.Route
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
 class NavigationTest {
@@ -68,6 +69,15 @@ class NavigationTest {
         sut.popLast()
         assertThrows<IllegalStateException> {
             sut.popTo(FakeRoute)
+        }
+    }
+
+    @Test
+    fun `should not emit last Route if list is empty`() {
+        sut.navigate(FakeRoute)
+        sut.popLast()
+        assertDoesNotThrow {
+            sut.popLast()
         }
     }
 }
