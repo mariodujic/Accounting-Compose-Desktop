@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.theme.viewmodel.ThemeViewModel
+import com.acc.common.ui.Strings.reselectOrganizationButton
 import com.acc.common.ui.Strings.settingsDarkThemeButton
 import com.acc.common.ui.Strings.settingsToolbarTitle
 import com.acc.common.ui.mediumPadding
@@ -20,7 +21,10 @@ import com.acc.navigation.Root
 import com.navigation.produce
 
 @Composable
-fun SettingsScreen(navigateBack: () -> Unit) {
+fun SettingsScreen(
+    navigateOrganizationSelection: () -> Unit,
+    navigateBack: () -> Unit
+) {
 
     val themeViewModel: ThemeViewModel = produce(Root)
     val darkTheme by themeViewModel.darkTheme.collectAsState()
@@ -39,17 +43,22 @@ fun SettingsScreen(navigateBack: () -> Unit) {
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Card {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(50.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(horizontal = mediumPadding, vertical = smallPadding)
-                ) {
-                    Text(text = settingsDarkThemeButton)
-                    Checkbox(
-                        checked = darkTheme,
-                        onCheckedChange = { themeViewModel.toggleTheme() }
-                    )
+            Card(modifier = Modifier.width(220.dp)) {
+                Column(modifier = Modifier.padding(horizontal = mediumPadding, vertical = smallPadding)) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(text = settingsDarkThemeButton)
+                        Checkbox(
+                            checked = darkTheme,
+                            onCheckedChange = { themeViewModel.toggleTheme() }
+                        )
+                    }
+                    Button(onClick = navigateOrganizationSelection) {
+                        Text(text = reselectOrganizationButton)
+                    }
                 }
             }
         }

@@ -35,8 +35,7 @@ fun HomeScreen(
     navigateAddExpense: () -> Unit,
     navigateAddSales: () -> Unit,
     navigateAddAccount: () -> Unit,
-    navigateSettings: () -> Unit,
-    navigateBack: () -> Unit
+    navigateSettings: () -> Unit
 ) {
 
     val homeNavigation = rememberNavigation(defaultRoute = Dashboard)
@@ -48,9 +47,6 @@ fun HomeScreen(
         topBar = {
             TopAppBar(
                 title = { Text(text = toolbarTitle, style = MaterialTheme.typography.h3) },
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
-                },
                 actions = {
                     IconButton(onClick = navigateSettings) { AppIcon(imageVector = Icons.Default.Settings) }
                 }

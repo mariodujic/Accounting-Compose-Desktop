@@ -33,7 +33,10 @@ fun Main() {
                 stateHolder.removeState(Unit)
                 OrganizationScreen(
                     navigateCreateOrganization = { navigation.navigate(CreateOrganizationRoute) },
-                    navigateHome = { navigation.navigate(HomeRoute) }
+                    navigateHome = {
+                        navigation.popLast()
+                        navigation.navigate(HomeRoute)
+                    }
                 )
             }
             is HomeRoute -> {
@@ -42,8 +45,7 @@ fun Main() {
                         navigateAddExpense = { navigation.navigate(AddExpenseRoute) },
                         navigateAddSales = { navigation.navigate(AddSalesRoute) },
                         navigateAddAccount = { navigation.navigate(AddChartOfAccountRoute) },
-                        navigateSettings = { navigation.navigate(SettingsRoute) },
-                        navigateBack = navigation::popLast
+                        navigateSettings = { navigation.navigate(SettingsRoute) }
                     )
                 }
             }
@@ -53,9 +55,10 @@ fun Main() {
             is CreateOrganizationRoute -> CreateOrganizationScreen {
                 navigation.popLast()
             }
-            is SettingsRoute -> SettingsScreen {
-                navigation.popLast()
-            }
+            is SettingsRoute -> SettingsScreen(
+                navigateOrganizationSelection = { navigation.navigateAsRoot(OrganizationSelectionRoute) },
+                navigateBack = navigation::popLast
+            )
         }
     }
 }

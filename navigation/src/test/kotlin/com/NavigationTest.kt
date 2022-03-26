@@ -40,6 +40,14 @@ class NavigationTest {
     }
 
     @Test
+    fun `should clear route list and set route`() {
+        sut.navigateAsRoot(FakeRoute)
+        val expectedRoute: Route = FakeRoute
+        val actualRoute = sut.routeStack.value
+        assertEquals(expectedRoute, actualRoute)
+    }
+
+    @Test
     fun `should pop last route`() {
         sut.navigate(FakeRoute)
         var expectedRoute: Route = FakeRoute

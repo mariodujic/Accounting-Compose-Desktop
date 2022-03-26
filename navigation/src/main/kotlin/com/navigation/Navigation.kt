@@ -21,6 +21,15 @@ internal class AppNavigation(defaultRoute: Route) : Navigation {
         _routeStack.tryEmit(routes.last())
     }
 
+    override fun navigateAsRoot(route: Route) {
+        routes.forEach {
+            popEntry(it)
+        }
+        routes.clear()
+        routes.add(route)
+        _routeStack.tryEmit(route)
+    }
+
     override fun popLast() {
         popEntry(routes.last())
         routes.removeLast()
@@ -40,6 +49,7 @@ internal class AppNavigation(defaultRoute: Route) : Navigation {
 interface Navigation {
     val routeStack: StateFlow<Route>
     fun navigate(route: Route)
+    fun navigateAsRoot(route: Route)
     fun popLast()
     fun popTo(route: Route)
 }
