@@ -50,12 +50,12 @@ fun AddChartOfAccountScreen(
                 ) {
                     AppTextField(
                         value = accountNumber,
-                        setValue = { viewModel.setAccountNumber(it) },
+                        setValue = viewModel::setAccountNumber,
                         label = addAccountNumberLabel
                     )
                     AppTextField(
                         value = accountDescription,
-                        setValue = { viewModel.setAccountDescription(it) },
+                        setValue = viewModel::setAccountDescription,
                         label = addAccountDescriptionLabel
                     )
                     Row(
@@ -64,7 +64,7 @@ fun AddChartOfAccountScreen(
                     ) {
                         Button(
                             enabled = accountValid,
-                            onClick = {}
+                            onClick = viewModel::addChartAccount
                         ) {
                             Text(text = addAccount)
                         }
