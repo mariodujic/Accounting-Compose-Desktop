@@ -16,8 +16,11 @@ import com.acc.common.ui.Strings
 import com.acc.common.ui.Strings.addAccount
 import com.acc.common.ui.Strings.addAccountDescriptionLabel
 import com.acc.common.ui.Strings.addAccountNumberLabel
+import com.acc.common.ui.Strings.addChartAccountNumberError
+import com.acc.common.ui.error
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
+import com.acc.features.home.chartofaccounts.add.presentation.result.AddChartAccountResult
 import com.acc.features.home.chartofaccounts.add.presentation.viewmodel.AddChartOfAccountsViewModel
 import com.acc.navigation.AddChartOfAccountRoute
 import com.navigation.produce
@@ -31,6 +34,8 @@ fun AddChartOfAccountScreen(
     val accountNumber by viewModel.accountNumber.collectAsState()
     val accountDescription by viewModel.accountDescription.collectAsState()
     val accountValid by viewModel.accountValid.collectAsState(initial = false)
+
+    val addChartAccountResult by viewModel.addChartResult.collectAsState()
 
     Scaffold(
         topBar = {
@@ -53,6 +58,9 @@ fun AddChartOfAccountScreen(
                         setValue = viewModel::setAccountNumber,
                         label = addAccountNumberLabel
                     )
+                    if (addChartAccountResult == AddChartAccountResult.ERROR_ACCOUNT_NUMBER_EXISTS) {
+                        Text(text = addChartAccountNumberError, color = error)
+                    }
                     AppTextField(
                         value = accountDescription,
                         setValue = viewModel::setAccountDescription,
