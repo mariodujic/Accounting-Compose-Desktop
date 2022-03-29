@@ -4,10 +4,12 @@ import com.acc.features.home.chartofaccounts.add.presentation.viewmodel.AddChart
 import com.acc.features.home.chartofaccounts.data.local.dao.ChartOfAccountsDao
 import com.acc.features.home.chartofaccounts.data.local.dao.ChartOfAccountsDaoImpl
 import com.acc.features.home.chartofaccounts.data.repository.ChartOfAccountsRepository
+import com.acc.features.home.chartofaccounts.list.presentation.viewmodel.ChartOfAccountsViewModel
 import org.koin.dsl.module
 
 val chartOfAccountsModule = module {
     factory { AddChartOfAccountsViewModel(get(), get()) }
+    factory { ChartOfAccountsViewModel(get()) }
     factory { ChartOfAccountsRepository(get()) }
     single<ChartOfAccountsDao> { ChartOfAccountsDaoImpl(get(), get()) }
 }
