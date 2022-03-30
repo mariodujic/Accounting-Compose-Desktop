@@ -24,7 +24,7 @@ fun Main() {
     val navigation = rememberNavigation(defaultRoute = OrganizationSelectionRoute)
     val route by navigation.routeStack.collectAsState()
 
-    val themeViewModel: ThemeViewModel = produce(Root)
+    val themeViewModel: ThemeViewModel = produce(RootRoute)
     val darkTheme by themeViewModel.darkTheme.collectAsState()
 
     AppTheme(useDarkTheme = darkTheme) {

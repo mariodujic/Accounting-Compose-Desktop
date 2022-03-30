@@ -24,4 +24,8 @@ class OrganizationRepository(private val dao: OrganizationDao) {
     suspend fun selectOrganization(organizationId: String) {
         dao.selectOrganization(organizationId)
     }
+
+    suspend fun unselectOrganizations() {
+        dao.unselectOrganizations()
+    }
 }

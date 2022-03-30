@@ -16,7 +16,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.acc.common.components.AppIcon
 import com.acc.common.ui.mediumPadding
@@ -46,11 +45,11 @@ fun ChartOfAccountsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(
-                            if (index % 2 == 0) {
-                                MaterialTheme.colors.surface.copy(alpha = 0.8f)
-                            } else {
-                                MaterialTheme.colors.surface.copy(alpha = 0.5f)
-                            }
+                            MaterialTheme.colors.surface.copy(
+                                if (index % 2 == 0) 0.8f
+                                else 0.5f
+                            )
+
                         )
                         .padding(mediumPadding)
                 ) {

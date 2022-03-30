@@ -7,5 +7,6 @@ interface OrganizationDao {
 
     suspend fun insertOrganization(organization: Organization)
     fun getOrganizations(): Flow<List<Organization>>
+    suspend fun unselectOrganizations()
     suspend fun selectOrganization(organizationId: String)
 }

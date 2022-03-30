@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.ui.Strings.createOrganizationButton
-import com.acc.common.ui.Strings.enterButton
 import com.acc.common.ui.Strings.noOrganizationSelectedLabel
 import com.acc.common.ui.Strings.organizationSelectionLabel
 import com.acc.common.ui.largePadding
@@ -31,6 +30,10 @@ fun OrganizationScreen(
     val selectedOrganization by viewModel.selectedOrganization.collectAsState()
     val hasSelectedOrganization by viewModel.hasSelectedOrganization.collectAsState()
     val organizations by viewModel.organizations.collectAsState()
+
+    LaunchedEffect(hasSelectedOrganization) {
+        if (hasSelectedOrganization) navigateHome()
+    }
 
     var showCompanies by remember { mutableStateOf(false) }
 
@@ -85,13 +88,6 @@ fun OrganizationScreen(
                                 }
                             }
                         }
-                    }
-                    Button(
-                        onClick = navigateHome,
-                        enabled = hasSelectedOrganization,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(text = enterButton)
                     }
                 }
             }

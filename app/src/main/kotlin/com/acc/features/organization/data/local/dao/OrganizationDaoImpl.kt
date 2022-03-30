@@ -13,14 +13,13 @@ class OrganizationDaoImpl(
 ) : OrganizationDao {
 
     private val table = "organization"
-    private val statement = connection.createStatement()
 
     init {
         createTableIfMissing()
     }
 
     private fun createTableIfMissing() {
-        val createTableStatement: String =
+        val createTableStatement =
             """
             CREATE TABLE IF NOT EXISTS $table (
             id text PRIMARY KEY,
@@ -31,6 +30,7 @@ class OrganizationDaoImpl(
             selected integer NOT NULL
             )
             """
+        val statement = connection.createStatement()
         statement.execute(createTableStatement)
     }
 
@@ -52,36 +52,48 @@ class OrganizationDaoImpl(
     }
 
     override fun getOrganizations(): Flow<List<Organization>> {
-        return updateOrganizations.map {
-            val query = "SELECT * FROM $table"
-            val resultSet = statement.executeQuery(query)
-            val organizationList = buildList {
-                while (resultSet.next()) {
-                    add(
-                        with(resultSet) {
-                            Organization(
-                                id = getString("id"),
-                                organizationId = getString("organizationId"),
-                                name = getString("name"),
-                                postCode = getString("postCode"),
-                                address = getString("address"),
-                                selected = getBoolean("selected")
-                            )
-                        }
-                    )
+        return updateOrganizations
+            .map {
+                val query = "SELECT * FROM $table"
+                val statement = connection.createStatement()
+                val resultSet = statement.executeQuery(query)
+                val organizationList = buildList {
+                    while (resultSet.next()) {
+                        add(
+                            with(resultSet) {
+                                Organization(
+                                    id = getString("id"),
+                                    organizationId = getString("organizationId"),
+                                    name = getString("name"),
+                                    postCode = getString("postCode"),
+                                    address = getString("address"),
+                                    selected = getBoolean("selected")
+                                )
+                            }
+                        )
+                    }
+                    resultSet.close()
+                    statement.close()
                 }
+                organizationList
             }
-            organizationList
-        }
+    }
+
+    override suspend fun unselectOrganizations() {
+        val unselectOrganizationQuery = "UPDATE $table SET selected = 0"
+        val statement = connection.createStatement()
+        statement.execute(unselectOrganizationQuery)
+        statement.close()
+        updateOrganizations.emit(Unit)
     }
 
     override suspend fun selectOrganization(organizationId: String) {
-        val unselectOrganizationQuery = "UPDATE $table SET selected = 0"
-        statement.execute(unselectOrganizationQuery)
+        unselectOrganizations()
         val selectOrganizationQuery = "UPDATE $table SET selected = 1 WHERE organizationId = ?"
         val preparedStatement = connection.prepareStatement(selectOrganizationQuery)
         preparedStatement.setString(1, organizationId)
         preparedStatement.executeUpdate()
+        preparedStatement.close()
         updateOrganizations.emit(Unit)
     }
 }

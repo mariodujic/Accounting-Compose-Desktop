@@ -8,6 +8,7 @@ import com.acc.features.home.chartofaccounts.di.chartOfAccountsModule
 import com.acc.features.home.presentation.di.homeModule
 import com.acc.features.main.ui.Main
 import com.acc.features.organization.di.organizationModule
+import com.acc.features.settings.di.settingsModule
 import com.database.databaseModule
 import com.preferences.preferencesModule
 import com.utils.utilsModule
@@ -30,7 +31,8 @@ private fun addKoinModules() {
             coroutinesModule,
             preferencesModule,
             themeModule,
-            chartOfAccountsModule
+            chartOfAccountsModule,
+            settingsModule
         )
     }
 }

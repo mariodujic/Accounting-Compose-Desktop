@@ -17,7 +17,9 @@ import com.acc.common.ui.Strings.settingsDarkThemeButton
 import com.acc.common.ui.Strings.settingsToolbarTitle
 import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
-import com.acc.navigation.Root
+import com.acc.features.settings.presentation.viewmodel.SettingsViewModel
+import com.acc.navigation.RootRoute
+import com.acc.navigation.SettingsRoute
 import com.navigation.produce
 
 @Composable
@@ -26,7 +28,9 @@ fun SettingsScreen(
     navigateBack: () -> Unit
 ) {
 
-    val themeViewModel: ThemeViewModel = produce(Root)
+    val settingsViewModel: SettingsViewModel = produce(SettingsRoute)
+
+    val themeViewModel: ThemeViewModel = produce(RootRoute)
     val darkTheme by themeViewModel.darkTheme.collectAsState()
 
     Scaffold(
@@ -56,7 +60,10 @@ fun SettingsScreen(
                             onCheckedChange = { themeViewModel.toggleTheme() }
                         )
                     }
-                    Button(onClick = navigateOrganizationSelection) {
+                    Button(onClick = {
+                        navigateOrganizationSelection()
+                        settingsViewModel.unselectOrganizations()
+                    }) {
                         Text(text = reselectOrganizationButton)
                     }
                 }

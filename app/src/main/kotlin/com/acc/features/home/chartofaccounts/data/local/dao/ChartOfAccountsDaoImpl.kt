@@ -13,14 +13,13 @@ class ChartOfAccountsDaoImpl(
 ) : ChartOfAccountsDao {
 
     private val table = "chart_account"
-    private val statement = connection.createStatement()
 
     init {
         createTableIfMissing()
     }
 
     private fun createTableIfMissing() {
-        val createTableStatement: String =
+        val createTableStatement =
             """
             CREATE TABLE IF NOT EXISTS $table (
             id text PRIMARY KEY,
@@ -28,7 +27,9 @@ class ChartOfAccountsDaoImpl(
             description text NOT NULL
             )
             """
+        val statement = connection.createStatement()
         statement.execute(createTableStatement)
+        statement.close()
     }
 
     private val updateAccounts: MutableSharedFlow<Unit> = MutableSharedFlow<Unit>(1).also {
@@ -48,6 +49,7 @@ class ChartOfAccountsDaoImpl(
     override fun getChartOfAccounts(): Flow<List<ChartAccount>> {
         return updateAccounts.map {
             val query = "SELECT * FROM $table"
+            val statement = connection.createStatement()
             val resultSet = statement.executeQuery(query)
             val chartOfAccounts = buildList {
                 while (resultSet.next()) {
@@ -61,6 +63,8 @@ class ChartOfAccountsDaoImpl(
                         }
                     )
                 }
+                resultSet.close()
+                statement.close()
             }
             chartOfAccounts
         }
