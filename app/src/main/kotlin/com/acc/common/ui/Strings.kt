@@ -3,6 +3,7 @@ package com.acc.common.ui
 object Strings {
     /*Common*/
     const val backButton = "Back"
+    const val editButton = "Edit"
 
     /*Organization selection*/
     const val organizationSelectionLabel = "Organization"
