@@ -42,4 +42,6 @@ object Strings {
     const val settingsToolbarTitle = "Settings"
     const val settingsDarkThemeButton = "Dark theme"
     const val reselectOrganizationButton = "Reselect organization"
+    const val settingsVatRate = "VAT rate %"
+    const val settingsVatRateError = "Invalid VAT number."
 }

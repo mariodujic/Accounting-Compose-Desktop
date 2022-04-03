@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
+import com.acc.common.ui.error
 import com.acc.common.ui.smallPadding
 import com.acc.common.ui.smallerPadding
 
@@ -18,7 +19,8 @@ import com.acc.common.ui.smallerPadding
 fun AppTextField(
     value: String,
     setValue: (String) -> Unit,
-    label: String
+    label: String,
+    errorMessage: String? = null
 ) {
 
     var focused by remember { mutableStateOf(false) }
@@ -48,5 +50,8 @@ fun AppTextField(
                     focused = it.isFocused
                 }
         )
+        if (errorMessage != null) {
+            Text(text = errorMessage, color = error)
+        }
     }
 }

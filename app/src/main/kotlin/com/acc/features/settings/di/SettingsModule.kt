@@ -4,5 +4,5 @@ import com.acc.features.settings.presentation.viewmodel.SettingsViewModel
 import org.koin.dsl.module
 
 val settingsModule = module {
-    factory { SettingsViewModel(get(), get()) }
+    factory { SettingsViewModel(get(), get(), get()) }
 }

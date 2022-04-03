@@ -4,17 +4,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
+import com.acc.common.components.AppTextField
 import com.acc.common.theme.viewmodel.ThemeViewModel
 import com.acc.common.ui.Strings.reselectOrganizationButton
 import com.acc.common.ui.Strings.settingsDarkThemeButton
 import com.acc.common.ui.Strings.settingsToolbarTitle
+import com.acc.common.ui.Strings.settingsVatRate
+import com.acc.common.ui.Strings.settingsVatRateError
 import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.settings.presentation.viewmodel.SettingsViewModel
@@ -29,6 +30,8 @@ fun SettingsScreen(
 ) {
 
     val settingsViewModel: SettingsViewModel = produce(SettingsRoute)
+    var vatRate by remember { mutableStateOf<String?>(null) }
+    val vatError by settingsViewModel.vatUpdateError.collectAsState()
 
     val themeViewModel: ThemeViewModel = produce(RootRoute)
     val darkTheme by themeViewModel.darkTheme.collectAsState()
@@ -49,6 +52,12 @@ fun SettingsScreen(
         ) {
             Card(modifier = Modifier.width(220.dp)) {
                 Column(modifier = Modifier.padding(horizontal = mediumPadding, vertical = smallPadding)) {
+                    Button(onClick = {
+                        navigateOrganizationSelection()
+                        settingsViewModel.unselectOrganizations()
+                    }) {
+                        Text(text = reselectOrganizationButton)
+                    }
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
@@ -60,12 +69,15 @@ fun SettingsScreen(
                             onCheckedChange = { themeViewModel.toggleTheme() }
                         )
                     }
-                    Button(onClick = {
-                        navigateOrganizationSelection()
-                        settingsViewModel.unselectOrganizations()
-                    }) {
-                        Text(text = reselectOrganizationButton)
-                    }
+                    AppTextField(
+                        value = vatRate ?: settingsViewModel.vatRate.toString(),
+                        setValue = {
+                            vatRate = it
+                            settingsViewModel.storeVatRate(it)
+                        },
+                        label = settingsVatRate,
+                        errorMessage = if (vatError) settingsVatRateError else null
+                    )
                 }
             }
         }
