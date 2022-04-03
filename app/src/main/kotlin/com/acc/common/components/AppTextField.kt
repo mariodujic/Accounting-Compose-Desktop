@@ -33,7 +33,7 @@ fun AppTextField(
         BasicTextField(
             value = value,
             onValueChange = setValue,
-            textStyle = LocalTextStyle.current,
+            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onBackground),
             modifier = Modifier
                 .fillMaxWidth()
                 .border(
