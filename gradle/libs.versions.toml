@@ -8,5 +8,4 @@ junit = { module = "org.junit.jupiter:junit-jupiter-engine", version = "5.8.1" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.0" }
 
 [plugins]
-kotlin = { id = "jvm", version = "1.6.10" }
-compose = { id = "org.jetbrains.compose", version = "1.1.0" }
+compose = { id = "org.jetbrains.compose", version = "1.1.1" }
