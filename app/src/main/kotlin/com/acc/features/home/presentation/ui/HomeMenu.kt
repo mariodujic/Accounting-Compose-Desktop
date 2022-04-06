@@ -12,12 +12,10 @@ import androidx.compose.ui.zIndex
 import com.acc.common.ui.Strings.homeNavigationCharOfAccountsButton
 import com.acc.common.ui.Strings.homeNavigationDashboardButton
 import com.acc.common.ui.Strings.homeNavigationExpensesButton
+import com.acc.common.ui.Strings.homeNavigationPartnersButton
 import com.acc.common.ui.Strings.homeNavigationSalesButton
 import com.acc.common.ui.smallPadding
-import com.acc.features.home.navigation.CharOfAccounts
-import com.acc.features.home.navigation.Dashboard
-import com.acc.features.home.navigation.Expenses
-import com.acc.features.home.navigation.Sales
+import com.acc.features.home.navigation.*
 import com.navigation.Route
 
 @Composable
@@ -27,6 +25,7 @@ fun HomeMenu(
     navigateExpenses: () -> Unit,
     navigateSales: () -> Unit,
     navigateCharOfAccounts: () -> Unit,
+    navigatePartners: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -54,6 +53,11 @@ fun HomeMenu(
                 text = homeNavigationCharOfAccountsButton,
                 selected = currentRoute is CharOfAccounts,
                 onClick = navigateCharOfAccounts
+            )
+            HomeMenuButton(
+                text = homeNavigationPartnersButton,
+                selected = currentRoute is Partners,
+                onClick = navigatePartners
             )
         }
     }

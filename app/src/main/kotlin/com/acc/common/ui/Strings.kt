@@ -24,6 +24,7 @@ object Strings {
     const val homeNavigationExpensesButton = "Expenses"
     const val homeNavigationSalesButton = "Sales"
     const val homeNavigationCharOfAccountsButton = "Chart of Accounts"
+    const val homeNavigationPartnersButton = "Partners"
 
     /*Add expense*/
     const val addExpenseToolbarTitle = "Add expense"
@@ -37,6 +38,9 @@ object Strings {
     const val addAccountDescriptionLabel = "Description"
     const val addAccount = "Add Account"
     const val addChartAccountNumberError = "Number is taken."
+
+    /*Add partner*/
+    const val addPartnerToolbarTitle = "Add partner"
 
     /*Settings*/
     const val settingsToolbarTitle = "Settings"

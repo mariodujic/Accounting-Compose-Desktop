@@ -9,4 +9,5 @@ object HomeRoute : Route
 object AddExpenseRoute : Route
 object AddSalesRoute : Route
 object AddChartOfAccountRoute : Route
+object AddPartnerRoute : Route
 object SettingsRoute : Route

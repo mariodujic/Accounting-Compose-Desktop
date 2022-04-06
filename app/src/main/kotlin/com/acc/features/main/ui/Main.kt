@@ -8,6 +8,7 @@ import com.acc.common.theme.viewmodel.ThemeViewModel
 import com.acc.common.ui.AppTheme
 import com.acc.features.home.chartofaccounts.add.presentation.ui.AddChartOfAccountScreen
 import com.acc.features.home.expenses.add.presentation.ui.AddExpenseScreen
+import com.acc.features.home.partners.add.presentation.ui.AddPartnerScreen
 import com.acc.features.home.presentation.ui.HomeScreen
 import com.acc.features.home.sales.add.presentation.ui.AddSalesScreen
 import com.acc.features.organization.create.presentation.ui.CreateOrganizationScreen
@@ -45,6 +46,7 @@ fun Main() {
                         navigateAddExpense = { navigation.navigate(AddExpenseRoute) },
                         navigateAddSales = { navigation.navigate(AddSalesRoute) },
                         navigateAddAccount = { navigation.navigate(AddChartOfAccountRoute) },
+                        navigateAddPartner = { navigation.navigate(AddPartnerRoute) },
                         navigateSettings = { navigation.navigate(SettingsRoute) }
                     )
                 }
@@ -52,6 +54,7 @@ fun Main() {
             is AddExpenseRoute -> AddExpenseScreen(navigateBack = navigation::popLast)
             is AddSalesRoute -> AddSalesScreen(navigateBack = navigation::popLast)
             is AddChartOfAccountRoute -> AddChartOfAccountScreen(navigateBack = navigation::popLast)
+            is AddPartnerRoute -> AddPartnerScreen(navigateBack = navigation::popLast)
             is CreateOrganizationRoute -> CreateOrganizationScreen {
                 navigation.popLast()
             }

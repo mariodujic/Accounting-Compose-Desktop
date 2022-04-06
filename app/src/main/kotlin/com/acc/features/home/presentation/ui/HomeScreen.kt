@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -19,10 +18,8 @@ import com.acc.common.components.AppIcon
 import com.acc.features.home.chartofaccounts.list.presentation.ui.ChartOfAccountsScreen
 import com.acc.features.home.dashboard.DashboardScreen
 import com.acc.features.home.expenses.list.presentation.ui.ExpensesScreen
-import com.acc.features.home.navigation.CharOfAccounts
-import com.acc.features.home.navigation.Dashboard
-import com.acc.features.home.navigation.Expenses
-import com.acc.features.home.navigation.Sales
+import com.acc.features.home.navigation.*
+import com.acc.features.home.partners.list.presentation.ui.PartnersScreen
 import com.acc.features.home.presentation.viewmodel.HomeViewModel
 import com.acc.features.home.sales.list.presentation.ui.SalesScreen
 import com.acc.navigation.HomeRoute
@@ -35,6 +32,7 @@ fun HomeScreen(
     navigateAddExpense: () -> Unit,
     navigateAddSales: () -> Unit,
     navigateAddAccount: () -> Unit,
+    navigateAddPartner: () -> Unit,
     navigateSettings: () -> Unit
 ) {
 
@@ -62,6 +60,7 @@ fun HomeScreen(
                     navigateExpenses = { homeNavigation.navigate(Expenses) },
                     navigateSales = { homeNavigation.navigate(Sales) },
                     navigateCharOfAccounts = { homeNavigation.navigate(CharOfAccounts) },
+                    navigatePartners = { homeNavigation.navigate(Partners) },
                     modifier = Modifier.menuWidth(screenWidth.dp)
                 )
                 HomeContent(modifier = Modifier.weight(3f)) {
@@ -70,6 +69,7 @@ fun HomeScreen(
                         is Expenses -> ExpensesScreen(navigateAddExpense = navigateAddExpense)
                         is Sales -> SalesScreen(navigateAddSales = navigateAddSales)
                         is CharOfAccounts -> ChartOfAccountsScreen(navigateAddAccount = navigateAddAccount)
+                        is Partners -> PartnersScreen(navigateAddPartner = navigateAddPartner)
                     }
                 }
             }
