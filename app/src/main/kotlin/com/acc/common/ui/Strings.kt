@@ -41,6 +41,10 @@ object Strings {
 
     /*Add partner*/
     const val addPartnerToolbarTitle = "Add partner"
+    const val partnerNameLabel = "Name"
+    const val partnerAddressLabel = "Address"
+    const val partnerPhoneNumberLabel = "Phone number"
+    const val addPartnerButton = "Add"
 
     /*Settings*/
     const val settingsToolbarTitle = "Settings"
