@@ -1,10 +1,16 @@
 package com.acc.features.home.partners.add.presentation.viewmodel
 
+import com.acc.features.home.partners.data.repository.PartnersRepository
 import com.navigation.Entry
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-class AddPartnerViewModel : Entry {
+class AddPartnerViewModel(
+    private val repository: PartnersRepository,
+    private val ioCoroutineScope: CoroutineScope
+) : Entry {
 
     private val _partnerName = MutableStateFlow("")
     val partnerName: StateFlow<String> = _partnerName
@@ -28,6 +34,18 @@ class AddPartnerViewModel : Entry {
     }
 
     fun addPartner() {
-
+        ioCoroutineScope.launch {
+            val name = _partnerName.value.trim()
+            val address = _partnerAddress.value.trim()
+            val phoneNumber = _partnerPhoneNumber.value.trim()
+            repository.insertPartner(
+                name = name,
+                address = address,
+                phoneNumber = phoneNumber
+            )
+            setPartnerName("")
+            setPartnerAddress("")
+            setPartnerPhoneNumber("")
+        }
     }
 }

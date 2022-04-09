@@ -47,8 +47,8 @@ class AddChartOfAccountsViewModel(
                 val accountNumber = _accountNumber.value.trim()
                 val accountDescription = _accountDescription.value.trim()
                 repository.insertAccount(accountNumber, accountDescription)
-                _accountNumber.emit("")
-                _accountDescription.emit("")
+                setAccountNumber("")
+                setAccountDescription("")
             }
         }
     }

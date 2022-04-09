@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
+import com.acc.common.ui.rowHeight
 import com.acc.common.ui.smallPadding
 import com.acc.features.home.chartofaccounts.list.presentation.viewmodel.ChartOfAccountsViewModel
 import com.acc.features.home.navigation.CharOfAccounts
@@ -34,8 +35,6 @@ fun ChartOfAccountsScreen(
 
     val accounts by viewModel.accounts.collectAsState(initial = emptyList())
     val selectedAccount by viewModel.selectedAccount.collectAsState()
-
-    val rowHeight = 40.dp
 
     Scaffold(
         floatingActionButton = {
