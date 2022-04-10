@@ -1,6 +1,5 @@
 package com.acc.features.home.chartofaccounts.list.presentation.ui
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,15 +11,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
+import com.acc.common.components.AppRowActions
 import com.acc.common.ui.rowHeight
 import com.acc.common.ui.smallPadding
 import com.acc.features.home.chartofaccounts.list.presentation.viewmodel.ChartOfAccountsViewModel
@@ -46,8 +43,6 @@ fun ChartOfAccountsScreen(
         LazyColumn {
             itemsIndexed(accounts) { index, item ->
 
-                val width by animateDpAsState(if (selectedAccount?.id == item.id) rowHeight else 0.dp)
-
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(smallPadding),
@@ -67,24 +62,10 @@ fun ChartOfAccountsScreen(
                     Text(text = item.number, modifier = Modifier.padding(start = smallPadding))
                     Text(text = item.description)
                     Spacer(modifier = Modifier.weight(1f))
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .clickable { }
-                            .width(width)
-                    ) {
-                        AppIcon(Icons.Default.Edit)
-                    }
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .clickable { viewModel.deleteAccount(item.id) }
-                            .width(width)
-                    ) {
-                        AppIcon(Icons.Default.Delete)
-                    }
+                    AppRowActions(
+                        selected = selectedAccount?.id == item.id,
+                        onDelete = { viewModel.deleteAccount(item.id) }
+                    )
                 }
             }
         }

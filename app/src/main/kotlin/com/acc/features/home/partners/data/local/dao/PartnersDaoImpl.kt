@@ -59,7 +59,7 @@ class PartnersDaoImpl(
     }
 
     override suspend fun getPartnerById(id: String): Partner? {
-        val getPartnerStatement = "SELEct * FROM $table WHERE id=?"
+        val getPartnerStatement = "SELECT * FROM $table WHERE id=?"
         val prepareStatement = connection.prepareStatement(getPartnerStatement)
         prepareStatement.setString(1, id)
         val resultStatement = prepareStatement.executeQuery()
