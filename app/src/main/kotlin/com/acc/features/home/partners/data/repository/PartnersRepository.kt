@@ -10,6 +10,10 @@ class PartnersRepository(private val dao: PartnersDao) {
         dao.insertPartner(name, address, phoneNumber)
     }
 
+    suspend fun deletePartner(id: String) {
+        dao.deletePartner(id)
+    }
+
     fun getPartners(): Flow<List<Partner>> {
         return dao.getPartners()
     }

@@ -10,6 +10,10 @@ class ChartOfAccountsRepository(private val dao: ChartOfAccountsDao) {
         dao.insertAccount(number, description)
     }
 
+    suspend fun deleteAccount(id: String) {
+        dao.deleteAccount(id)
+    }
+
     fun getChartOfAccounts(): Flow<List<ChartAccount>> {
         return dao.getChartOfAccounts()
     }

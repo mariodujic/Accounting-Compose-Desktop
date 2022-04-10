@@ -82,7 +82,7 @@ fun PartnersScreen(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxHeight()
-                            .clickable { }
+                            .clickable { viewModel.deletePartner(item.id) }
                             .width(width)
                     ) {
                         AppIcon(Icons.Default.Delete)

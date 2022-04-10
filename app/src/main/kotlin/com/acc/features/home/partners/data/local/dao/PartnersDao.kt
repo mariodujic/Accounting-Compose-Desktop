@@ -7,4 +7,5 @@ interface PartnersDao {
 
     suspend fun insertPartner(name: String, address: String, phoneNumber: String)
     fun getPartners(): Flow<List<Partner>>
+    suspend fun deletePartner(id: String)
 }

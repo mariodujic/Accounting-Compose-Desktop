@@ -43,6 +43,16 @@ class ChartOfAccountsDaoImpl(
         prepareStatement.setString(2, number)
         prepareStatement.setString(3, description)
         prepareStatement.executeUpdate()
+        prepareStatement.close()
+        updateAccounts.emit(Unit)
+    }
+
+    override suspend fun deleteAccount(id: String) {
+        val deleteAccountStatement = "DELETE FROM $table WHERE id=?"
+        val prepareStatement = connection.prepareStatement(deleteAccountStatement)
+        prepareStatement.setString(1, id)
+        prepareStatement.executeUpdate()
+        prepareStatement.close()
         updateAccounts.emit(Unit)
     }
 

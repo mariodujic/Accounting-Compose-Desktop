@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val partnersViewModel = module {
     factory { AddPartnerViewModel(get(), get()) }
-    factory { PartnersViewModel(get()) }
+    factory { PartnersViewModel(get(), get()) }
     factory { PartnersRepository(get()) }
     single<PartnersDao> { PartnersDaoImpl(get(), get()) }
 }

@@ -7,4 +7,5 @@ interface ChartOfAccountsDao {
 
     suspend fun insertAccount(number: String, description: String)
     fun getChartOfAccounts(): Flow<List<ChartAccount>>
+    suspend fun deleteAccount(id: String)
 }

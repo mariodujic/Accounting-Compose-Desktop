@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val chartOfAccountsModule = module {
     factory { AddChartOfAccountsViewModel(get(), get()) }
-    factory { ChartOfAccountsViewModel(get()) }
+    factory { ChartOfAccountsViewModel(get(), get()) }
     factory { ChartOfAccountsRepository(get()) }
     single<ChartOfAccountsDao> { ChartOfAccountsDaoImpl(get(), get()) }
 }

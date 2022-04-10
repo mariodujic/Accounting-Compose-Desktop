@@ -45,6 +45,16 @@ class PartnersDaoImpl(
         prepareStatement.setString(3, address)
         prepareStatement.setString(4, phoneNumber)
         prepareStatement.executeUpdate()
+        prepareStatement.close()
+        updatePartners.emit(Unit)
+    }
+
+    override suspend fun deletePartner(id: String) {
+        val deletePartnerStatement = "DELETE FROM $table WHERE id=?"
+        val prepareStatement = connection.prepareStatement(deletePartnerStatement)
+        prepareStatement.setString(1, id)
+        prepareStatement.executeUpdate()
+        prepareStatement.close()
         updatePartners.emit(Unit)
     }
 
