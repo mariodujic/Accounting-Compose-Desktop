@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ChartOfAccountsDao {
 
-    suspend fun insertAccount(number: String, description: String)
+    suspend fun insertAccount(number: String, description: String, connectedPartnerId: String)
     fun getChartOfAccounts(): Flow<List<ChartAccount>>
     suspend fun deleteAccount(id: String)
 }

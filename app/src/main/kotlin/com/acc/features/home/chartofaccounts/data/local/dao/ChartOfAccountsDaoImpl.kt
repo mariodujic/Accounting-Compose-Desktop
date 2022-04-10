@@ -24,7 +24,8 @@ class ChartOfAccountsDaoImpl(
             CREATE TABLE IF NOT EXISTS $table (
             id text PRIMARY KEY,
             number text NOT NULL,
-            description text NOT NULL
+            description text NOT NULL,
+            partner_id text NOT NULL
             )
             """
         val statement = connection.createStatement()
@@ -36,12 +37,13 @@ class ChartOfAccountsDaoImpl(
         it.tryEmit(Unit)
     }
 
-    override suspend fun insertAccount(number: String, description: String) {
-        val insertAccountStatement = "INSERT INTO $table values(?,?,?)"
+    override suspend fun insertAccount(number: String, description: String, connectedPartnerId: String) {
+        val insertAccountStatement = "INSERT INTO $table values(?,?,?,?)"
         val prepareStatement = connection.prepareStatement(insertAccountStatement)
         prepareStatement.setString(1, uuidUtils.getUuid())
         prepareStatement.setString(2, number)
         prepareStatement.setString(3, description)
+        prepareStatement.setString(4, connectedPartnerId)
         prepareStatement.executeUpdate()
         prepareStatement.close()
         updateAccounts.emit(Unit)
@@ -68,7 +70,8 @@ class ChartOfAccountsDaoImpl(
                             ChartAccount(
                                 id = getString("id"),
                                 number = getString("number"),
-                                description = getString("description")
+                                description = getString("description"),
+                                partnerId = getString("partner_id")
                             )
                         }
                     )

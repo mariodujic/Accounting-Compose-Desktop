@@ -1,17 +1,17 @@
 package com.acc.features.home.chartofaccounts.add.presentation.viewmodel
 
+import com.acc.common.ui.Strings.notSelectedLabel
 import com.acc.features.home.chartofaccounts.add.presentation.result.AddChartAccountResult
 import com.acc.features.home.chartofaccounts.data.repository.ChartOfAccountsRepository
+import com.acc.features.home.partners.data.repository.PartnersRepository
 import com.navigation.Entry
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AddChartOfAccountsViewModel(
-    private val repository: ChartOfAccountsRepository,
+    private val accountsRepository: ChartOfAccountsRepository,
+    private val partnersRepository: PartnersRepository,
     private val ioCoroutineScope: CoroutineScope
 ) : Entry {
 
@@ -29,6 +29,17 @@ class AddChartOfAccountsViewModel(
         _accountDescription.tryEmit(accountDescription)
     }
 
+    private val _connectedPartnerId = MutableStateFlow("")
+    val connectedPartnerName: Flow<String> = _connectedPartnerId.map { partnerId ->
+        val partners = partnersRepository.getPartners().first()
+        val partnerName = partners.firstOrNull { it.id == partnerId }?.name ?: notSelectedLabel
+        partnerName
+    }
+
+    fun setConnectedPartner(partnerId: String) {
+        _connectedPartnerId.tryEmit(partnerId)
+    }
+
     val accountValid = combine(_accountNumber, _accountDescription) { number, description ->
         number.isNotEmpty() && description.isNotEmpty()
     }
@@ -39,17 +50,20 @@ class AddChartOfAccountsViewModel(
     fun addChartAccount() {
         ioCoroutineScope.launch {
             _addChartResult.emit(AddChartAccountResult.LOADING)
-            val accounts = repository.getChartOfAccounts().first()
+            val accounts = accountsRepository.getChartOfAccounts().first()
             val accountNumberTaken = accounts.any { it.number == _accountNumber.value }
             if (accountNumberTaken) {
                 _addChartResult.emit(AddChartAccountResult.ERROR_ACCOUNT_NUMBER_EXISTS)
             } else {
                 val accountNumber = _accountNumber.value.trim()
                 val accountDescription = _accountDescription.value.trim()
-                repository.insertAccount(accountNumber, accountDescription)
+                val connectedPartnerId = _connectedPartnerId.value
+                accountsRepository.insertAccount(accountNumber, accountDescription, connectedPartnerId)
                 setAccountNumber("")
                 setAccountDescription("")
             }
         }
     }
+
+    val partners = partnersRepository.getPartners()
 }

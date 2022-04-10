@@ -3,22 +3,23 @@ package com.acc.features.home.chartofaccounts.add.presentation.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.components.AppTextField
-import com.acc.common.ui.Strings
 import com.acc.common.ui.Strings.addAccount
 import com.acc.common.ui.Strings.addAccountDescriptionLabel
 import com.acc.common.ui.Strings.addAccountNumberLabel
+import com.acc.common.ui.Strings.addAccountToolbarTitle
 import com.acc.common.ui.Strings.addChartAccountNumberError
+import com.acc.common.ui.Strings.connectPartnerLabel
 import com.acc.common.ui.error
 import com.acc.common.ui.largePadding
+import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.home.chartofaccounts.add.presentation.result.AddChartAccountResult
 import com.acc.features.home.chartofaccounts.add.presentation.viewmodel.AddChartOfAccountsViewModel
@@ -33,14 +34,18 @@ fun AddChartOfAccountScreen(
 
     val accountNumber by viewModel.accountNumber.collectAsState()
     val accountDescription by viewModel.accountDescription.collectAsState()
+    val connectedPartnerName by viewModel.connectedPartnerName.collectAsState(initial = "")
     val accountValid by viewModel.accountValid.collectAsState(initial = false)
+
+    val partners by viewModel.partners.collectAsState(initial = emptyList())
+    var expandedPartners by remember { mutableStateOf(false) }
 
     val addChartAccountResult by viewModel.addChartResult.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = Strings.addAccountToolbarTitle, style = MaterialTheme.typography.h3) },
+                title = { Text(text = addAccountToolbarTitle, style = MaterialTheme.typography.h3) },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
                 }
@@ -66,6 +71,37 @@ fun AddChartOfAccountScreen(
                         setValue = viewModel::setAccountDescription,
                         label = addAccountDescriptionLabel
                     )
+                    Box {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(mediumPadding),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            AppTextField(
+                                value = connectedPartnerName,
+                                enabled = false,
+                                label = connectPartnerLabel,
+                                modifier = Modifier.weight(1f)
+                            )
+                            IconButton(onClick = { expandedPartners = true }) {
+                                AppIcon(imageVector = Icons.Default.Add)
+                            }
+                        }
+                        DropdownMenu(
+                            expanded = expandedPartners,
+                            onDismissRequest = { expandedPartners = false }
+                        ) {
+                            partners.forEach {
+                                DropdownMenuItem(
+                                    onClick = {
+                                        expandedPartners = false
+                                        viewModel.setConnectedPartner(it.id)
+                                    }
+                                ) {
+                                    Text(text = it.name)
+                                }
+                            }
+                        }
+                    }
                     Row(
                         horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()

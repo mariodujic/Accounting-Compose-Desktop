@@ -4,6 +4,7 @@ object Strings {
     /*Common*/
     const val backButton = "Back"
     const val editButton = "Edit"
+    const val notSelectedLabel = "Not selected"
 
     /*Organization selection*/
     const val organizationSelectionLabel = "Organization"
@@ -36,6 +37,7 @@ object Strings {
     const val addAccountToolbarTitle = "Add account"
     const val addAccountNumberLabel = "Number"
     const val addAccountDescriptionLabel = "Description"
+    const val connectPartnerLabel = "Connect partner"
     const val addAccount = "Add Account"
     const val addChartAccountNumberError = "Number is taken."
 

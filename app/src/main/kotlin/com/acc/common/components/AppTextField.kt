@@ -18,13 +18,15 @@ import com.acc.common.ui.smallerPadding
 @Composable
 fun AppTextField(
     value: String,
-    setValue: (String) -> Unit,
+    setValue: (String) -> Unit = {},
     label: String,
-    errorMessage: String? = null
+    enabled: Boolean = true,
+    errorMessage: String? = null,
+    modifier: Modifier = Modifier
 ) {
 
     var focused by remember { mutableStateOf(false) }
-    Column {
+    Column(modifier = modifier) {
         Text(
             text = label,
             style = MaterialTheme.typography.subtitle1
@@ -33,6 +35,7 @@ fun AppTextField(
         BasicTextField(
             value = value,
             onValueChange = setValue,
+            enabled = enabled,
             textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onBackground),
             modifier = Modifier
                 .fillMaxWidth()
