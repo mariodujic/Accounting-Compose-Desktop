@@ -34,7 +34,7 @@ fun AddChartOfAccountScreen(
 
     val accountNumber by viewModel.accountNumber.collectAsState()
     val accountDescription by viewModel.accountDescription.collectAsState()
-    val connectedPartnerName by viewModel.connectedPartnerName.collectAsState(initial = "")
+    val connectedPartnerName by viewModel.partnerName.collectAsState(initial = "")
     val accountValid by viewModel.accountValid.collectAsState(initial = false)
 
     val partners by viewModel.partners.collectAsState(initial = emptyList())
@@ -94,7 +94,7 @@ fun AddChartOfAccountScreen(
                                 DropdownMenuItem(
                                     onClick = {
                                         expandedPartners = false
-                                        viewModel.setConnectedPartner(it.id)
+                                        viewModel.setPartner(it.id)
                                     }
                                 ) {
                                     Text(text = it.name)

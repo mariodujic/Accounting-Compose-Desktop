@@ -58,6 +58,25 @@ class PartnersDaoImpl(
         updatePartners.emit(Unit)
     }
 
+    override suspend fun getPartnerById(id: String): Partner? {
+        val getPartnerStatement = "SELEct * FROM $table WHERE id=?"
+        val prepareStatement = connection.prepareStatement(getPartnerStatement)
+        prepareStatement.setString(1, id)
+        val resultStatement = prepareStatement.executeQuery()
+        if(!resultStatement.next()) return null
+        val partner = with(resultStatement) {
+            Partner(
+                id = getString("id"),
+                name = getString("name"),
+                address = getString("address"),
+                phoneNumber = getString("phone_number")
+            )
+        }
+        prepareStatement.close()
+        resultStatement.close()
+        return partner
+    }
+
     override fun getPartners(): Flow<List<Partner>> {
         return updatePartners.map {
             val query = "SELECT * FROM $table"

@@ -14,6 +14,10 @@ class PartnersRepository(private val dao: PartnersDao) {
         dao.deletePartner(id)
     }
 
+    suspend fun getPartnerById(id: String): Partner? {
+        return dao.getPartnerById(id)
+    }
+
     fun getPartners(): Flow<List<Partner>> {
         return dao.getPartners()
     }

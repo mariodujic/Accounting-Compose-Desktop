@@ -29,15 +29,15 @@ class AddChartOfAccountsViewModel(
         _accountDescription.tryEmit(accountDescription)
     }
 
-    private val _connectedPartnerId = MutableStateFlow("")
-    val connectedPartnerName: Flow<String> = _connectedPartnerId.map { partnerId ->
-        val partners = partnersRepository.getPartners().first()
-        val partnerName = partners.firstOrNull { it.id == partnerId }?.name ?: notSelectedLabel
+    private val _partnerId = MutableStateFlow("")
+    val partnerName: Flow<String> = _partnerId.map { partnerId ->
+        val partner = partnersRepository.getPartnerById(partnerId)
+        val partnerName = partner?.name ?: notSelectedLabel
         partnerName
     }
 
-    fun setConnectedPartner(partnerId: String) {
-        _connectedPartnerId.tryEmit(partnerId)
+    fun setPartner(partnerId: String) {
+        _partnerId.tryEmit(partnerId)
     }
 
     val accountValid = combine(_accountNumber, _accountDescription) { number, description ->
@@ -57,10 +57,11 @@ class AddChartOfAccountsViewModel(
             } else {
                 val accountNumber = _accountNumber.value.trim()
                 val accountDescription = _accountDescription.value.trim()
-                val connectedPartnerId = _connectedPartnerId.value
-                accountsRepository.insertAccount(accountNumber, accountDescription, connectedPartnerId)
+                val partnerId = _partnerId.value
+                accountsRepository.insertAccount(accountNumber, accountDescription, partnerId)
                 setAccountNumber("")
                 setAccountDescription("")
+                setPartner("")
             }
         }
     }
