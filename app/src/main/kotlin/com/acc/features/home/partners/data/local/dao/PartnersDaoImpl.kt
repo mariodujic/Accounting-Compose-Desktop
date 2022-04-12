@@ -1,5 +1,6 @@
 package com.acc.features.home.partners.data.local.dao
 
+import com.acc.features.home.partners.data.local.dao.PartnersDao.Companion.table
 import com.acc.features.home.partners.model.Partner
 import com.utils.UuidUtils
 import kotlinx.coroutines.flow.Flow
@@ -11,8 +12,6 @@ class PartnersDaoImpl(
     private val connection: Connection,
     private val uuidUtils: UuidUtils
 ) : PartnersDao {
-
-    private val table = "partner"
 
     init {
         createTableIfMissing()
@@ -63,7 +62,7 @@ class PartnersDaoImpl(
         val prepareStatement = connection.prepareStatement(getPartnerStatement)
         prepareStatement.setString(1, id)
         val resultStatement = prepareStatement.executeQuery()
-        if(!resultStatement.next()) return null
+        if (!resultStatement.next()) return null
         val partner = with(resultStatement) {
             Partner(
                 id = getString("id"),

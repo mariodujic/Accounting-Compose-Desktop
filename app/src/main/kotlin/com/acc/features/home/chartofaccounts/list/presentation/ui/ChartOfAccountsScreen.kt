@@ -60,7 +60,7 @@ fun ChartOfAccountsScreen(
                         )
                 ) {
                     Text(text = item.number, modifier = Modifier.padding(start = smallPadding))
-                    Text(text = item.description)
+                    Text(text = item.partner?.name ?: item.description)
                     Spacer(modifier = Modifier.weight(1f))
                     AppRowActions(
                         selected = selectedAccount?.id == item.id,

@@ -9,4 +9,8 @@ interface PartnersDao {
     fun getPartners(): Flow<List<Partner>>
     suspend fun deletePartner(id: String)
     suspend fun getPartnerById(id: String): Partner?
+
+    companion object {
+        const val table = "partner"
+    }
 }

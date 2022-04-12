@@ -1,6 +1,7 @@
 package com.acc.features.home.chartofaccounts.data.local.dao
 
 import com.acc.features.home.chartofaccounts.model.ChartAccount
+import com.acc.features.home.partners.data.local.dao.PartnersDao
 import com.utils.UuidUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -9,6 +10,7 @@ import java.sql.Connection
 
 class ChartOfAccountsDaoImpl(
     private val connection: Connection,
+    private val partnerDao: PartnersDao,
     private val uuidUtils: UuidUtils
 ) : ChartOfAccountsDao {
 
@@ -67,11 +69,13 @@ class ChartOfAccountsDaoImpl(
                 while (resultSet.next()) {
                     add(
                         with(resultSet) {
+                            val partnerId = getString("partner_id")
+                            val partner = partnerDao.getPartnerById(partnerId)
                             ChartAccount(
                                 id = getString("id"),
                                 number = getString("number"),
                                 description = getString("description"),
-                                partnerId = getString("partner_id")
+                                partner = partner
                             )
                         }
                     )
