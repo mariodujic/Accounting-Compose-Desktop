@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +20,7 @@ import com.acc.common.ui.Strings.settingsVatRate
 import com.acc.common.ui.Strings.settingsVatRateError
 import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
+import com.acc.features.settings.presentation.model.Language
 import com.acc.features.settings.presentation.viewmodel.SettingsViewModel
 import com.acc.navigation.RootRoute
 import com.acc.navigation.SettingsRoute
@@ -35,6 +38,9 @@ fun SettingsScreen(
 
     val themeViewModel: ThemeViewModel = produce(RootRoute)
     val darkTheme by themeViewModel.darkTheme.collectAsState()
+
+    var showLanguages by remember { mutableStateOf(false) }
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
     Scaffold(
         topBar = {
@@ -78,6 +84,30 @@ fun SettingsScreen(
                         label = settingsVatRate,
                         errorMessage = if (vatError) settingsVatRateError else null
                     )
+                    Box {
+                        OutlinedButton(
+                            onClick = { showLanguages = true },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                                Text(text = selectedLanguage.value)
+                                AppIcon(imageVector = if (showLanguages) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown)
+                            }
+                        }
+                        DropdownMenu(
+                            expanded = showLanguages,
+                            onDismissRequest = { showLanguages = false }
+                        ) {
+                            Language.values().forEach {
+                                DropdownMenuItem(onClick = {
+                                    showLanguages = false
+                                    settingsViewModel.updateSelectedLanguage(it)
+                                }) {
+                                    Text(text = it.value)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

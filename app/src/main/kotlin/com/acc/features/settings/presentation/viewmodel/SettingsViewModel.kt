@@ -1,6 +1,7 @@
 package com.acc.features.settings.presentation.viewmodel
 
 import com.acc.features.organization.data.repository.OrganizationRepository
+import com.acc.features.settings.presentation.model.Language
 import com.navigation.Entry
 import com.preferences.Preferences
 import kotlinx.coroutines.CoroutineScope
@@ -27,10 +28,17 @@ class SettingsViewModel(
     fun storeVatRate(rate: String) {
         _vatUpdateError.tryEmit(false)
         val vatRate = rate.toIntOrNull()
-        if(vatRate == null) {
+        if (vatRate == null) {
             _vatUpdateError.tryEmit(true)
         }
         preferences.set(VAT_RATE_KEY, vatRate)
+    }
+
+    private val _selectedLanguage = MutableStateFlow(Language.ENGLISH)
+    val selectedLanguage: StateFlow<Language> = _selectedLanguage
+
+    fun updateSelectedLanguage(language: Language) {
+        _selectedLanguage.tryEmit(language)
     }
 
     private companion object {

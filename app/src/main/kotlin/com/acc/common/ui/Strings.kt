@@ -54,4 +54,5 @@ object Strings {
     const val reselectOrganizationButton = "Reselect organization"
     const val settingsVatRate = "VAT rate %"
     const val settingsVatRateError = "Invalid VAT number."
+    const val settingsLanguage = "Language"
 }
