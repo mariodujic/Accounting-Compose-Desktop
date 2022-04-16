@@ -12,11 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.components.AppTextField
-import com.acc.common.ui.Strings.addPartnerButton
-import com.acc.common.ui.Strings.addPartnerToolbarTitle
-import com.acc.common.ui.Strings.partnerAddressLabel
-import com.acc.common.ui.Strings.partnerNameLabel
-import com.acc.common.ui.Strings.partnerPhoneNumberLabel
+import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.home.partners.add.presentation.viewmodel.AddPartnerViewModel
@@ -29,6 +25,8 @@ fun AddPartnerScreen(
     navigateBack: () -> Unit
 ) {
 
+    val locale = LocaleComposition.current
+
     val partnerName by viewModel.partnerName.collectAsState()
     val partnerAddress by viewModel.partnerAddress.collectAsState()
     val partnerPhoneNumber by viewModel.partnerPhoneNumber.collectAsState()
@@ -36,7 +34,7 @@ fun AddPartnerScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = addPartnerToolbarTitle, style = MaterialTheme.typography.h3) },
+                title = { Text(text = locale.addPartnerToolbarTitle, style = MaterialTheme.typography.h3) },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
                 }
@@ -52,24 +50,24 @@ fun AddPartnerScreen(
                     AppTextField(
                         value = partnerName,
                         setValue = viewModel::setPartnerName,
-                        label = partnerNameLabel
+                        label = locale.partnerNameLabel
                     )
                     AppTextField(
                         value = partnerAddress,
                         setValue = viewModel::setPartnerAddress,
-                        label = partnerAddressLabel
+                        label = locale.partnerAddressLabel
                     )
                     AppTextField(
                         value = partnerPhoneNumber,
                         setValue = viewModel::setPartnerPhoneNumber,
-                        label = partnerPhoneNumberLabel
+                        label = locale.partnerPhoneNumberLabel
                     )
                     Row(
                         horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Button(onClick = viewModel::addPartner) {
-                            Text(text = addPartnerButton)
+                            Text(text = locale.addPartnerButton)
                         }
                     }
                 }

@@ -12,13 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.components.AppTextField
-import com.acc.common.ui.Strings.createOrganizationButton
-import com.acc.common.ui.Strings.createOrganizationIdError
-import com.acc.common.ui.Strings.createOrganizationToolbarTitle
-import com.acc.common.ui.Strings.organizationAddressLabel
-import com.acc.common.ui.Strings.organizationIdLabel
-import com.acc.common.ui.Strings.organizationNameLabel
-import com.acc.common.ui.Strings.organizationPostCodeLabel
+import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.common.ui.error
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
@@ -34,6 +28,8 @@ fun CreateOrganizationScreen(
     navigateBack: () -> Unit
 ) {
 
+    val locale = LocaleComposition.current
+
     val organization = rememberOrganizationState()
     val result by viewModel.result.collectAsState()
     if (result == CreateOrganizationResult.SUCCESS) {
@@ -43,7 +39,7 @@ fun CreateOrganizationScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = createOrganizationToolbarTitle, style = MaterialTheme.typography.h4) },
+                title = { Text(text = locale.createOrganizationToolbarTitle, style = MaterialTheme.typography.h4) },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
                 }
@@ -62,25 +58,25 @@ fun CreateOrganizationScreen(
                     AppTextField(
                         value = organization.organizationId,
                         setValue = { organization.organizationId = it },
-                        label = organizationIdLabel
+                        label = locale.organizationIdLabel
                     )
                     if (result == CreateOrganizationResult.ERROR) {
-                        Text(text = createOrganizationIdError, color = error)
+                        Text(text = locale.createOrganizationIdError, color = error)
                     }
                     AppTextField(
                         value = organization.name,
                         setValue = { organization.name = it },
-                        label = organizationNameLabel
+                        label = locale.organizationNameLabel
                     )
                     AppTextField(
                         value = organization.postCode,
                         setValue = { organization.postCode = it },
-                        label = organizationPostCodeLabel
+                        label = locale.organizationPostCodeLabel
                     )
                     AppTextField(
                         value = organization.address,
                         setValue = { organization.address = it },
-                        label = organizationAddressLabel
+                        label = locale.organizationAddressLabel
                     )
                     Row(
                         horizontalArrangement = Arrangement.End,
@@ -97,7 +93,7 @@ fun CreateOrganizationScreen(
                                 )
                             }
                         ) {
-                            Text(text = createOrganizationButton)
+                            Text(text = locale.createOrganizationButton)
                         }
                     }
                 }

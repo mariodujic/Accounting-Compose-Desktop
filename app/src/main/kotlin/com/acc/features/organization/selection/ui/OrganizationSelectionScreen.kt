@@ -11,9 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
-import com.acc.common.ui.Strings.createOrganizationButton
-import com.acc.common.ui.Strings.noOrganizationSelectedLabel
-import com.acc.common.ui.Strings.organizationSelectionLabel
+import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.smallPadding
 import com.acc.features.organization.selection.viewmodel.OrganizationSelectionViewModel
@@ -25,6 +23,8 @@ fun OrganizationScreen(
     navigateCreateOrganization: () -> Unit,
     navigateHome: () -> Unit
 ) {
+
+    val locale = LocaleComposition.current
 
     val viewModel = produce<OrganizationSelectionViewModel>(OrganizationSelectionRoute)
     val selectedOrganization by viewModel.selectedOrganization.collectAsState()
@@ -53,7 +53,7 @@ fun OrganizationScreen(
                         .background(MaterialTheme.colors.secondary)
                 ) {
                     Text(
-                        text = organizationSelectionLabel,
+                        text = locale.organizationSelectionLabel,
                         color = MaterialTheme.colors.onSecondary,
                         style = MaterialTheme.typography.h5
                     )
@@ -65,7 +65,7 @@ fun OrganizationScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                                Text(text = selectedOrganization?.name ?: noOrganizationSelectedLabel)
+                                Text(text = selectedOrganization?.name ?: locale.noOrganizationSelectedLabel)
                                 AppIcon(imageVector = if (showCompanies) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown)
                             }
                         }
@@ -77,7 +77,7 @@ fun OrganizationScreen(
                                 onClick = navigateCreateOrganization,
                                 modifier = Modifier.fillMaxWidth().padding(horizontal = smallPadding)
                             ) {
-                                Text(text = createOrganizationButton)
+                                Text(text = locale.createOrganizationButton)
                             }
                             organizations.forEach {
                                 DropdownMenuItem(onClick = {

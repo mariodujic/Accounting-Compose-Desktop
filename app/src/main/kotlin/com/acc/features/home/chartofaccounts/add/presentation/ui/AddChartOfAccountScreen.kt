@@ -11,12 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.components.AppTextField
-import com.acc.common.ui.Strings.addAccount
-import com.acc.common.ui.Strings.addAccountDescriptionLabel
-import com.acc.common.ui.Strings.addAccountNumberLabel
-import com.acc.common.ui.Strings.addAccountToolbarTitle
-import com.acc.common.ui.Strings.addChartAccountNumberError
-import com.acc.common.ui.Strings.connectPartnerLabel
+import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.common.ui.error
 import com.acc.common.ui.largePadding
 import com.acc.common.ui.mediumPadding
@@ -32,9 +27,11 @@ fun AddChartOfAccountScreen(
     navigateBack: () -> Unit
 ) {
 
+    val locale = LocaleComposition.current
+
     val accountNumber by viewModel.accountNumber.collectAsState()
     val accountDescription by viewModel.accountDescription.collectAsState()
-    val connectedPartnerName by viewModel.partnerName.collectAsState(initial = "")
+    val connectedPartnerName by viewModel.partnerName.collectAsState(initial = locale.notSelectedLabel)
     val accountValid by viewModel.accountValid.collectAsState(initial = false)
 
     val partners by viewModel.partners.collectAsState(initial = emptyList())
@@ -45,7 +42,7 @@ fun AddChartOfAccountScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = addAccountToolbarTitle, style = MaterialTheme.typography.h3) },
+                title = { Text(text = locale.addAccountToolbarTitle, style = MaterialTheme.typography.h3) },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
                 }
@@ -61,15 +58,15 @@ fun AddChartOfAccountScreen(
                     AppTextField(
                         value = accountNumber,
                         setValue = viewModel::setAccountNumber,
-                        label = addAccountNumberLabel
+                        label = locale.addAccountNumberLabel
                     )
                     if (addChartAccountResult == AddChartAccountResult.ERROR_ACCOUNT_NUMBER_EXISTS) {
-                        Text(text = addChartAccountNumberError, color = error)
+                        Text(text = locale.addChartAccountNumberError, color = error)
                     }
                     AppTextField(
                         value = accountDescription,
                         setValue = viewModel::setAccountDescription,
-                        label = addAccountDescriptionLabel
+                        label = locale.addAccountDescriptionLabel
                     )
                     Box {
                         Row(
@@ -77,9 +74,9 @@ fun AddChartOfAccountScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             AppTextField(
-                                value = connectedPartnerName,
+                                value = connectedPartnerName ?: locale.notSelectedLabel,
                                 enabled = false,
-                                label = connectPartnerLabel,
+                                label = locale.connectPartnerLabel,
                                 modifier = Modifier.weight(1f)
                             )
                             IconButton(onClick = { expandedPartners = true }) {
@@ -110,7 +107,7 @@ fun AddChartOfAccountScreen(
                             enabled = accountValid,
                             onClick = viewModel::addChartAccount
                         ) {
-                            Text(text = addAccount)
+                            Text(text = locale.addAccount)
                         }
                     }
                 }

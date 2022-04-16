@@ -9,11 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.acc.common.ui.Strings.homeNavigationCharOfAccountsButton
-import com.acc.common.ui.Strings.homeNavigationDashboardButton
-import com.acc.common.ui.Strings.homeNavigationExpensesButton
-import com.acc.common.ui.Strings.homeNavigationPartnersButton
-import com.acc.common.ui.Strings.homeNavigationSalesButton
+import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.common.ui.smallPadding
 import com.acc.features.home.navigation.*
 import com.navigation.Route
@@ -28,6 +24,8 @@ fun HomeMenu(
     navigatePartners: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val locale = LocaleComposition.current
+
     Surface(
         color = Color.LightGray,
         elevation = 3.dp,
@@ -35,27 +33,27 @@ fun HomeMenu(
     ) {
         Column(modifier = Modifier.padding(smallPadding)) {
             HomeMenuButton(
-                text = homeNavigationDashboardButton,
+                text = locale.homeNavigationDashboardButton,
                 selected = currentRoute is Dashboard,
                 onClick = navigateDashboard
             )
             HomeMenuButton(
-                text = homeNavigationExpensesButton,
+                text = locale.homeNavigationExpensesButton,
                 selected = currentRoute is Expenses,
                 onClick = navigateExpenses
             )
             HomeMenuButton(
-                text = homeNavigationSalesButton,
+                text = locale.homeNavigationSalesButton,
                 selected = currentRoute is Sales,
                 onClick = navigateSales
             )
             HomeMenuButton(
-                text = homeNavigationCharOfAccountsButton,
+                text = locale.homeNavigationCharOfAccountsButton,
                 selected = currentRoute is CharOfAccounts,
                 onClick = navigateCharOfAccounts
             )
             HomeMenuButton(
-                text = homeNavigationPartnersButton,
+                text = locale.homeNavigationPartnersButton,
                 selected = currentRoute is Partners,
                 onClick = navigatePartners
             )

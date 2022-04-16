@@ -12,15 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.acc.common.components.AppIcon
 import com.acc.common.components.AppTextField
+import com.acc.common.locale.presentation.model.Croatian
+import com.acc.common.locale.presentation.model.English
+import com.acc.common.locale.presentation.model.LocaleComposition
+import com.acc.common.locale.presentation.viewmodel.LocaleViewModel
 import com.acc.common.theme.viewmodel.ThemeViewModel
-import com.acc.common.ui.Strings.reselectOrganizationButton
-import com.acc.common.ui.Strings.settingsDarkThemeButton
-import com.acc.common.ui.Strings.settingsToolbarTitle
-import com.acc.common.ui.Strings.settingsVatRate
-import com.acc.common.ui.Strings.settingsVatRateError
 import com.acc.common.ui.mediumPadding
 import com.acc.common.ui.smallPadding
-import com.acc.features.settings.presentation.model.Language
 import com.acc.features.settings.presentation.viewmodel.SettingsViewModel
 import com.acc.navigation.RootRoute
 import com.acc.navigation.SettingsRoute
@@ -32,6 +30,8 @@ fun SettingsScreen(
     navigateBack: () -> Unit
 ) {
 
+    val locale = LocaleComposition.current
+
     val settingsViewModel: SettingsViewModel = produce(SettingsRoute)
     var vatRate by remember { mutableStateOf<String?>(null) }
     val vatError by settingsViewModel.vatUpdateError.collectAsState()
@@ -39,13 +39,14 @@ fun SettingsScreen(
     val themeViewModel: ThemeViewModel = produce(RootRoute)
     val darkTheme by themeViewModel.darkTheme.collectAsState()
 
-    var showLanguages by remember { mutableStateOf(false) }
-    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val localeViewModel: LocaleViewModel = produce(RootRoute)
+    var showLocales by remember { mutableStateOf(false) }
+    val availableLocale by remember { mutableStateOf(listOf(English, Croatian)) }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = settingsToolbarTitle, style = MaterialTheme.typography.h3) },
+                title = { Text(text = locale.settingsToolbarTitle, style = MaterialTheme.typography.h3) },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) { AppIcon(imageVector = Icons.Default.ArrowBack) }
                 }
@@ -62,14 +63,14 @@ fun SettingsScreen(
                         navigateOrganizationSelection()
                         settingsViewModel.unselectOrganizations()
                     }) {
-                        Text(text = reselectOrganizationButton)
+                        Text(text = locale.reselectOrganizationButton)
                     }
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(text = settingsDarkThemeButton)
+                        Text(text = locale.settingsDarkThemeButton)
                         Checkbox(
                             checked = darkTheme,
                             onCheckedChange = { themeViewModel.toggleTheme() }
@@ -81,29 +82,29 @@ fun SettingsScreen(
                             vatRate = it
                             settingsViewModel.storeVatRate(it)
                         },
-                        label = settingsVatRate,
-                        errorMessage = if (vatError) settingsVatRateError else null
+                        label = locale.settingsVatRate,
+                        errorMessage = if (vatError) locale.settingsVatRateError else null
                     )
                     Box {
                         OutlinedButton(
-                            onClick = { showLanguages = true },
+                            onClick = { showLocales = true },
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                                Text(text = selectedLanguage.value)
-                                AppIcon(imageVector = if (showLanguages) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown)
+                                Text(text = locale.language)
+                                AppIcon(imageVector = if (showLocales) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown)
                             }
                         }
                         DropdownMenu(
-                            expanded = showLanguages,
-                            onDismissRequest = { showLanguages = false }
+                            expanded = showLocales,
+                            onDismissRequest = { showLocales = false }
                         ) {
-                            Language.values().forEach {
+                            availableLocale.forEach {
                                 DropdownMenuItem(onClick = {
-                                    showLanguages = false
-                                    settingsViewModel.updateSelectedLanguage(it)
+                                    showLocales = false
+                                    localeViewModel.updateSelectedLocale(it)
                                 }) {
-                                    Text(text = it.value)
+                                    Text(text = it.language)
                                 }
                             }
                         }

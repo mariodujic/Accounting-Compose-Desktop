@@ -1,6 +1,6 @@
 package com.acc.features.home.chartofaccounts.add.presentation.viewmodel
 
-import com.acc.common.ui.Strings.notSelectedLabel
+import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.features.home.chartofaccounts.add.presentation.result.AddChartAccountResult
 import com.acc.features.home.chartofaccounts.data.repository.ChartOfAccountsRepository
 import com.acc.features.home.partners.data.repository.PartnersRepository
@@ -30,9 +30,9 @@ class AddChartOfAccountsViewModel(
     }
 
     private val _partnerId = MutableStateFlow("")
-    val partnerName: Flow<String> = _partnerId.map { partnerId ->
+    val partnerName: Flow<String?> = _partnerId.map { partnerId ->
         val partner = partnersRepository.getPartnerById(partnerId)
-        val partnerName = partner?.name ?: notSelectedLabel
+        val partnerName = partner?.name
         partnerName
     }
 
