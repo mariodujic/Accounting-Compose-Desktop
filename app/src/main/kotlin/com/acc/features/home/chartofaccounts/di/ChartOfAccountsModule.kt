@@ -11,5 +11,5 @@ val chartOfAccountsModule = module {
     factory { AddChartOfAccountsViewModel(get(), get(), get()) }
     factory { ChartOfAccountsViewModel(get(), get()) }
     factory { ChartOfAccountsRepository(get()) }
-    single<ChartOfAccountsDao> { ChartOfAccountsDaoImpl(get(), get(), get()) }
+    single<ChartOfAccountsDao> { ChartOfAccountsDaoImpl(get(), get(), get(), get()) }
 }

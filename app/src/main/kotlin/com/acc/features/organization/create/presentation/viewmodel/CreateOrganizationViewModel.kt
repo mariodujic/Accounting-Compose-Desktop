@@ -4,6 +4,7 @@ import com.acc.features.organization.create.presentation.result.CreateOrganizati
 import com.acc.features.organization.data.repository.OrganizationRepository
 import com.acc.features.organization.model.Organization
 import com.navigation.Entry
+import com.utils.DateUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 
 class CreateOrganizationViewModel(
     private val repository: OrganizationRepository,
+    private val dateUtils: DateUtils,
     private val ioCoroutineScope: CoroutineScope
 ) : Entry {
 
@@ -30,7 +32,8 @@ class CreateOrganizationViewModel(
                 organizationId = organizationId,
                 name = name,
                 postCode = postCode,
-                address = address
+                address = address,
+                createdOn = dateUtils.getCurrentTime()
             )
             repository.insertOrganization(organization)
             _result.emit(CreateOrganizationResult.SUCCESS)

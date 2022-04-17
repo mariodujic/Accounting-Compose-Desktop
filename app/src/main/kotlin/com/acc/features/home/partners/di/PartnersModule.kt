@@ -11,5 +11,5 @@ val partnersModule = module {
     factory { AddPartnerViewModel(get(), get()) }
     factory { PartnersViewModel(get(), get()) }
     factory { PartnersRepository(get()) }
-    single<PartnersDao> { PartnersDaoImpl(get(), get()) }
+    single<PartnersDao> { PartnersDaoImpl(get(), get(), get()) }
 }

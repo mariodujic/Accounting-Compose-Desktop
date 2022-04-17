@@ -27,7 +27,8 @@ class OrganizationDaoImpl(
             name text NOT NULL,
             postCode text NOT NULL,
             address text NOT NULL,
-            selected integer NOT NULL
+            selected integer NOT NULL,
+            created_on integer NOT NULL
             )
             """
         val statement = connection.createStatement()
@@ -39,7 +40,7 @@ class OrganizationDaoImpl(
     }
 
     override suspend fun insertOrganization(organization: Organization) {
-        val insertOrganizationStatement = "INSERT INTO $table values(?,?,?,?,?,?)"
+        val insertOrganizationStatement = "INSERT INTO $table values(?,?,?,?,?,?,?)"
         val prepareStatement = connection.prepareStatement(insertOrganizationStatement)
         prepareStatement.setString(1, uuidUtils.getUuid())
         prepareStatement.setString(2, organization.organizationId)
@@ -47,6 +48,7 @@ class OrganizationDaoImpl(
         prepareStatement.setString(4, organization.postCode)
         prepareStatement.setString(5, organization.address)
         prepareStatement.setBoolean(6, organization.selected)
+        prepareStatement.setLong(7, organization.createdOn)
         prepareStatement.executeUpdate()
         updateOrganizations.emit(Unit)
     }
@@ -67,7 +69,8 @@ class OrganizationDaoImpl(
                                     name = getString("name"),
                                     postCode = getString("postCode"),
                                     address = getString("address"),
-                                    selected = getBoolean("selected")
+                                    selected = getBoolean("selected"),
+                                    createdOn = getLong("created_on")
                                 )
                             }
                         )

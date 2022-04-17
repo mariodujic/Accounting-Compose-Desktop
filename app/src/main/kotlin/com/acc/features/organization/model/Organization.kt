@@ -6,5 +6,6 @@ data class Organization(
     val name: String = "",
     val postCode: String = "",
     val address: String = "",
-    val selected: Boolean = false
+    val selected: Boolean = false,
+    val createdOn: Long
 )

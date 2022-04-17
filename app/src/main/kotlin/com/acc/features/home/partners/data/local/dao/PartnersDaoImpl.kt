@@ -2,6 +2,7 @@ package com.acc.features.home.partners.data.local.dao
 
 import com.acc.features.home.partners.data.local.dao.PartnersDao.Companion.table
 import com.acc.features.home.partners.model.Partner
+import com.utils.DateUtils
 import com.utils.UuidUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -10,7 +11,8 @@ import java.sql.Connection
 
 class PartnersDaoImpl(
     private val connection: Connection,
-    private val uuidUtils: UuidUtils
+    private val uuidUtils: UuidUtils,
+    private val dateUtils: DateUtils
 ) : PartnersDao {
 
     init {
@@ -24,7 +26,8 @@ class PartnersDaoImpl(
             id text PRIMARY KEY,
             name text NOT NULL,
             address text NOT NULL,
-            phone_number text NOT NULL
+            phone_number text NOT NULL,
+            created_on integer NOT NULL
             )
             """
         val statement = connection.createStatement()
@@ -37,12 +40,13 @@ class PartnersDaoImpl(
     }
 
     override suspend fun insertPartner(name: String, address: String, phoneNumber: String) {
-        val insertPartnerStatement = "INSERT INTO $table values(?,?,?,?)"
+        val insertPartnerStatement = "INSERT INTO $table values(?,?,?,?,?)"
         val prepareStatement = connection.prepareStatement(insertPartnerStatement)
         prepareStatement.setString(1, uuidUtils.getUuid())
         prepareStatement.setString(2, name)
         prepareStatement.setString(3, address)
         prepareStatement.setString(4, phoneNumber)
+        prepareStatement.setLong(5, dateUtils.getCurrentTime())
         prepareStatement.executeUpdate()
         prepareStatement.close()
         updatePartners.emit(Unit)
@@ -68,7 +72,8 @@ class PartnersDaoImpl(
                 id = getString("id"),
                 name = getString("name"),
                 address = getString("address"),
-                phoneNumber = getString("phone_number")
+                phoneNumber = getString("phone_number"),
+                createdOn = getLong("created_on")
             )
         }
         prepareStatement.close()
@@ -89,7 +94,8 @@ class PartnersDaoImpl(
                                 id = getString("id"),
                                 name = getString("name"),
                                 address = getString("address"),
-                                phoneNumber = getString("phone_number")
+                                phoneNumber = getString("phone_number"),
+                                createdOn = getLong("created_on")
                             )
                         }
                     )

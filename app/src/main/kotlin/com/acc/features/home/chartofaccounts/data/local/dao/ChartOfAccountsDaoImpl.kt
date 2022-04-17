@@ -2,6 +2,7 @@ package com.acc.features.home.chartofaccounts.data.local.dao
 
 import com.acc.features.home.chartofaccounts.model.ChartAccount
 import com.acc.features.home.partners.data.local.dao.PartnersDao
+import com.utils.DateUtils
 import com.utils.UuidUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -11,7 +12,8 @@ import java.sql.Connection
 class ChartOfAccountsDaoImpl(
     private val connection: Connection,
     private val partnerDao: PartnersDao,
-    private val uuidUtils: UuidUtils
+    private val uuidUtils: UuidUtils,
+    private val dateUtils: DateUtils
 ) : ChartOfAccountsDao {
 
     private val table = "chart_account"
@@ -27,7 +29,8 @@ class ChartOfAccountsDaoImpl(
             id text PRIMARY KEY,
             number text NOT NULL,
             description text NOT NULL,
-            partner_id text NOT NULL
+            partner_id text NOT NULL,
+            created_on number NOT NULL
             )
             """
         val statement = connection.createStatement()
@@ -40,12 +43,13 @@ class ChartOfAccountsDaoImpl(
     }
 
     override suspend fun insertAccount(number: String, description: String, connectedPartnerId: String) {
-        val insertAccountStatement = "INSERT INTO $table values(?,?,?,?)"
+        val insertAccountStatement = "INSERT INTO $table values(?,?,?,?,?)"
         val prepareStatement = connection.prepareStatement(insertAccountStatement)
         prepareStatement.setString(1, uuidUtils.getUuid())
         prepareStatement.setString(2, number)
         prepareStatement.setString(3, description)
         prepareStatement.setString(4, connectedPartnerId)
+        prepareStatement.setLong(5, dateUtils.getCurrentTime())
         prepareStatement.executeUpdate()
         prepareStatement.close()
         updateAccounts.emit(Unit)
@@ -75,7 +79,8 @@ class ChartOfAccountsDaoImpl(
                                 id = getString("id"),
                                 number = getString("number"),
                                 description = getString("description"),
-                                partner = partner
+                                partner = partner,
+                                createdOn = getLong("created_on")
                             )
                         }
                     )

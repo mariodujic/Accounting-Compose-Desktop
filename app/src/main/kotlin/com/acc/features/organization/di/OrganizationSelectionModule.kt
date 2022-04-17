@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val organizationModule = module {
     factory { OrganizationSelectionViewModel(get(), get()) }
-    factory { CreateOrganizationViewModel(get(), get()) }
+    factory { CreateOrganizationViewModel(get(), get(), get()) }
     single { OrganizationRepository(get()) }
     single<OrganizationDao> { OrganizationDaoImpl(get(), get()) }
 }
