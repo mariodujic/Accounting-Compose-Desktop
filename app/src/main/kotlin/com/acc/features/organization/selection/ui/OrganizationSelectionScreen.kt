@@ -27,9 +27,9 @@ fun OrganizationScreen(
     val locale = LocaleComposition.current
 
     val viewModel = produce<OrganizationSelectionViewModel>(OrganizationSelectionRoute)
-    val selectedOrganization by viewModel.selectedOrganization.collectAsState()
-    val hasSelectedOrganization by viewModel.hasSelectedOrganization.collectAsState()
-    val organizations by viewModel.organizations.collectAsState()
+    val selectedOrganization by viewModel.selectedOrganization.collectAsState(initial = null)
+    val hasSelectedOrganization by viewModel.hasSelectedOrganization.collectAsState(initial = false)
+    val organizations by viewModel.organizations.collectAsState(initial = emptyList())
 
     LaunchedEffect(hasSelectedOrganization) {
         if (hasSelectedOrganization) navigateHome()
@@ -82,7 +82,7 @@ fun OrganizationScreen(
                             organizations.forEach {
                                 DropdownMenuItem(onClick = {
                                     showCompanies = false
-                                    viewModel.selectCompany(it)
+                                    viewModel.selectOrganization(it)
                                 }) {
                                     Text(text = it.name)
                                 }

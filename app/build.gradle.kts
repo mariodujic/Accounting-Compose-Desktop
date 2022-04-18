@@ -21,6 +21,8 @@ dependencies {
     implementation(project(":preferences"))
     implementation(compose.desktop.currentOs)
     implementation(libs.koin)
+    implementation(libs.junit)
+    implementation(libs.testCoroutines)
 }
 
 compose.desktop {

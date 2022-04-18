@@ -4,12 +4,13 @@ import com.acc.features.organization.create.presentation.viewmodel.CreateOrganiz
 import com.acc.features.organization.data.local.dao.OrganizationDao
 import com.acc.features.organization.data.local.dao.OrganizationDaoImpl
 import com.acc.features.organization.data.repository.OrganizationRepository
+import com.acc.features.organization.data.repository.OrganizationRepositoryImpl
 import com.acc.features.organization.selection.viewmodel.OrganizationSelectionViewModel
 import org.koin.dsl.module
 
 val organizationModule = module {
     factory { OrganizationSelectionViewModel(get(), get()) }
     factory { CreateOrganizationViewModel(get(), get(), get()) }
-    single { OrganizationRepository(get()) }
+    single<OrganizationRepository> { OrganizationRepositoryImpl(get()) }
     single<OrganizationDao> { OrganizationDaoImpl(get(), get()) }
 }
