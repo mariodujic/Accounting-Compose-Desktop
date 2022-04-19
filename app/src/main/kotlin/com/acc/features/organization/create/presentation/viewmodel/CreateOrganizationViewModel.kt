@@ -23,7 +23,7 @@ class CreateOrganizationViewModel(
     fun createOrganization(organizationId: String, name: String, postCode: String, address: String) {
 
         ioCoroutineScope.launch {
-            if (organizationDataValid(organizationId)) {
+            if (organizationIdExists(organizationId)) {
                 _result.emit(CreateOrganizationResult.ERROR)
                 return@launch
             }
@@ -40,7 +40,7 @@ class CreateOrganizationViewModel(
         }
     }
 
-    private suspend fun organizationDataValid(organizationId: String): Boolean {
+    private suspend fun organizationIdExists(organizationId: String): Boolean {
         return repository.getOrganizations().first().any { it.organizationId == organizationId }
     }
 }

@@ -1,4 +1,4 @@
-package acc.features.testutils
+package com.acc.testutils
 
 import com.acc.features.organization.model.Organization
 

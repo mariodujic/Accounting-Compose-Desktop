@@ -1,10 +1,6 @@
 package com.utils
 
-import java.util.*
+interface DateUtils {
 
-class DateUtils {
-
-    fun getCurrentTime(): Long {
-        return Date().time
-    }
+    fun getCurrentTime(): Long
 }

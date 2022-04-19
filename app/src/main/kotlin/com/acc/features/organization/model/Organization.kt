@@ -7,5 +7,5 @@ data class Organization(
     val postCode: String = "",
     val address: String = "",
     val selected: Boolean = false,
-    val createdOn: Long
+    val createdOn: Long = 0
 )

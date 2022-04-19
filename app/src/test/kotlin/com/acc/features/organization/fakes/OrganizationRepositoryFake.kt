@@ -1,4 +1,4 @@
-package acc.features.organization.fakes
+package com.acc.features.organization.fakes
 
 import com.acc.features.organization.data.repository.OrganizationRepository
 import com.acc.features.organization.model.Organization

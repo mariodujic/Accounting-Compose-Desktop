@@ -1,7 +1,7 @@
-package acc.features.organization.selection.viewmodel
+package com.acc.features.organization.selection.viewmodel
 
-import acc.features.organization.fakes.OrganizationRepositoryFake
-import acc.features.testutils.organizationFake
+import com.acc.features.organization.fakes.OrganizationRepositoryFake
+import com.acc.testutils.organizationFake
 import com.acc.features.organization.selection.viewmodel.OrganizationSelectionViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
