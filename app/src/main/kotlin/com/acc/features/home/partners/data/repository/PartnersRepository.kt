@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 class PartnersRepository(private val dao: PartnersDao) {
 
-    suspend fun insertPartner(name: String, address: String, phoneNumber: String) {
-        dao.insertPartner(name, address, phoneNumber)
+    suspend fun insertPartner(name: String, address: String, phoneNumber: String, organizationId: String) {
+        dao.insertPartner(name, address, phoneNumber, organizationId)
     }
 
     suspend fun deletePartner(id: String) {

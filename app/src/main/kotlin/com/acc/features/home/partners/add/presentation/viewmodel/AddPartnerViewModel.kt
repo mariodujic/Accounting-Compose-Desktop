@@ -1,14 +1,17 @@
 package com.acc.features.home.partners.add.presentation.viewmodel
 
 import com.acc.features.home.partners.data.repository.PartnersRepository
+import com.acc.features.organization.data.repository.OrganizationRepository
 import com.navigation.Entry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class AddPartnerViewModel(
     private val repository: PartnersRepository,
+    private val organizationRepository: OrganizationRepository,
     private val ioCoroutineScope: CoroutineScope
 ) : Entry {
 
@@ -38,10 +41,12 @@ class AddPartnerViewModel(
             val name = _partnerName.value.trim()
             val address = _partnerAddress.value.trim()
             val phoneNumber = _partnerPhoneNumber.value.trim()
+            val organization = organizationRepository.getSelectedOrganization().first() ?: return@launch
             repository.insertPartner(
                 name = name,
                 address = address,
-                phoneNumber = phoneNumber
+                phoneNumber = phoneNumber,
+                organizationId = organization.organizationId
             )
             setPartnerName("")
             setPartnerAddress("")

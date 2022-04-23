@@ -8,8 +8,8 @@ import com.acc.features.home.chartofaccounts.list.presentation.viewmodel.ChartOf
 import org.koin.dsl.module
 
 val chartOfAccountsModule = module {
-    factory { AddChartOfAccountsViewModel(get(), get(), get()) }
-    factory { ChartOfAccountsViewModel(get(), get()) }
+    factory { AddChartOfAccountsViewModel(get(), get(), get(), get()) }
+    factory { ChartOfAccountsViewModel(get(), get(), get()) }
     factory { ChartOfAccountsRepository(get()) }
     single<ChartOfAccountsDao> { ChartOfAccountsDaoImpl(get(), get(), get(), get()) }
 }

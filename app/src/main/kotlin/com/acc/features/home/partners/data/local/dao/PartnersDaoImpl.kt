@@ -27,6 +27,7 @@ class PartnersDaoImpl(
             name text NOT NULL,
             address text NOT NULL,
             phone_number text NOT NULL,
+            organization_id text NOT NULL,
             created_on integer NOT NULL
             )
             """
@@ -39,14 +40,15 @@ class PartnersDaoImpl(
         it.tryEmit(Unit)
     }
 
-    override suspend fun insertPartner(name: String, address: String, phoneNumber: String) {
-        val insertPartnerStatement = "INSERT INTO $table values(?,?,?,?,?)"
+    override suspend fun insertPartner(name: String, address: String, phoneNumber: String, organizationId: String) {
+        val insertPartnerStatement = "INSERT INTO $table values(?,?,?,?,?,?)"
         val prepareStatement = connection.prepareStatement(insertPartnerStatement)
         prepareStatement.setString(1, uuidUtils.getUuid())
         prepareStatement.setString(2, name)
         prepareStatement.setString(3, address)
         prepareStatement.setString(4, phoneNumber)
-        prepareStatement.setLong(5, dateUtils.getCurrentTime())
+        prepareStatement.setString(5, organizationId)
+        prepareStatement.setLong(6, dateUtils.getCurrentTime())
         prepareStatement.executeUpdate()
         prepareStatement.close()
         updatePartners.emit(Unit)
@@ -73,6 +75,7 @@ class PartnersDaoImpl(
                 name = getString("name"),
                 address = getString("address"),
                 phoneNumber = getString("phone_number"),
+                organizationId = getString("organization_id"),
                 createdOn = getLong("created_on")
             )
         }
@@ -95,6 +98,7 @@ class PartnersDaoImpl(
                                 name = getString("name"),
                                 address = getString("address"),
                                 phoneNumber = getString("phone_number"),
+                                organizationId = getString("organization_id"),
                                 createdOn = getLong("created_on")
                             )
                         }

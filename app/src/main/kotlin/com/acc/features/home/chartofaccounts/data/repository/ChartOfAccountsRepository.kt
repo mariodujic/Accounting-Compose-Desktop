@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 class ChartOfAccountsRepository(private val dao: ChartOfAccountsDao) {
 
-    suspend fun insertAccount(number: String, description: String, connectedPartnerId: String) {
-        dao.insertAccount(number, description, connectedPartnerId)
+    suspend fun insertAccount(number: String, description: String, partnerId: String, organizationId: String) {
+        dao.insertAccount(number, description, partnerId, organizationId)
     }
 
     suspend fun deleteAccount(id: String) {

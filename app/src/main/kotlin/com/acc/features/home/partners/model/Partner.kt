@@ -5,5 +5,6 @@ data class Partner(
     val name: String,
     val address: String,
     val phoneNumber: String,
+    val organizationId: String,
     val createdOn: Long
 )

@@ -1,9 +1,9 @@
 package com.acc.features.home.chartofaccounts.add.presentation.viewmodel
 
-import com.acc.common.locale.presentation.model.LocaleComposition
 import com.acc.features.home.chartofaccounts.add.presentation.result.AddChartAccountResult
 import com.acc.features.home.chartofaccounts.data.repository.ChartOfAccountsRepository
 import com.acc.features.home.partners.data.repository.PartnersRepository
+import com.acc.features.organization.data.repository.OrganizationRepository
 import com.navigation.Entry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class AddChartOfAccountsViewModel(
     private val accountsRepository: ChartOfAccountsRepository,
     private val partnersRepository: PartnersRepository,
+    private val organizationRepository: OrganizationRepository,
     private val ioCoroutineScope: CoroutineScope
 ) : Entry {
 
@@ -58,7 +59,9 @@ class AddChartOfAccountsViewModel(
                 val accountNumber = _accountNumber.value.trim()
                 val accountDescription = _accountDescription.value.trim()
                 val partnerId = _partnerId.value
-                accountsRepository.insertAccount(accountNumber, accountDescription, partnerId)
+                val organization = organizationRepository.getSelectedOrganization().first()
+                val organizationId = organization?.organizationId ?: return@launch
+                accountsRepository.insertAccount(accountNumber, accountDescription, partnerId, organizationId)
                 setAccountNumber("")
                 setAccountDescription("")
                 setPartner("")

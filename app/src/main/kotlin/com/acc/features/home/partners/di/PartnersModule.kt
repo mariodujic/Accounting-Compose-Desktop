@@ -8,8 +8,8 @@ import com.acc.features.home.partners.list.presentation.viewmodel.PartnersViewMo
 import org.koin.dsl.module
 
 val partnersModule = module {
-    factory { AddPartnerViewModel(get(), get()) }
-    factory { PartnersViewModel(get(), get()) }
+    factory { AddPartnerViewModel(get(), get(), get()) }
+    factory { PartnersViewModel(get(), get(), get()) }
     factory { PartnersRepository(get()) }
     single<PartnersDao> { PartnersDaoImpl(get(), get(), get()) }
 }

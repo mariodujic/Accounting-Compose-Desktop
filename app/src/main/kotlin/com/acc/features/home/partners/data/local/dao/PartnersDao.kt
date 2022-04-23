@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PartnersDao {
 
-    suspend fun insertPartner(name: String, address: String, phoneNumber: String)
+    suspend fun insertPartner(name: String, address: String, phoneNumber: String, organizationId: String)
     fun getPartners(): Flow<List<Partner>>
     suspend fun deletePartner(id: String)
     suspend fun getPartnerById(id: String): Partner?

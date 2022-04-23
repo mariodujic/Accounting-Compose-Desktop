@@ -7,5 +7,6 @@ data class ChartAccount(
     val number: String,
     val description: String,
     val partner: Partner? = null,
+    val organizationId: String,
     val createdOn: Long
 )

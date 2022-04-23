@@ -30,6 +30,7 @@ class ChartOfAccountsDaoImpl(
             number text NOT NULL,
             description text NOT NULL,
             partner_id text NOT NULL,
+            organization_id text NOT NULL,
             created_on number NOT NULL
             )
             """
@@ -42,14 +43,15 @@ class ChartOfAccountsDaoImpl(
         it.tryEmit(Unit)
     }
 
-    override suspend fun insertAccount(number: String, description: String, connectedPartnerId: String) {
-        val insertAccountStatement = "INSERT INTO $table values(?,?,?,?,?)"
+    override suspend fun insertAccount(number: String, description: String, partnerId: String, organizationId: String) {
+        val insertAccountStatement = "INSERT INTO $table values(?,?,?,?,?,?)"
         val prepareStatement = connection.prepareStatement(insertAccountStatement)
         prepareStatement.setString(1, uuidUtils.getUuid())
         prepareStatement.setString(2, number)
         prepareStatement.setString(3, description)
-        prepareStatement.setString(4, connectedPartnerId)
-        prepareStatement.setLong(5, dateUtils.getCurrentTime())
+        prepareStatement.setString(4, partnerId)
+        prepareStatement.setString(5, organizationId)
+        prepareStatement.setLong(6, dateUtils.getCurrentTime())
         prepareStatement.executeUpdate()
         prepareStatement.close()
         updateAccounts.emit(Unit)
@@ -80,6 +82,7 @@ class ChartOfAccountsDaoImpl(
                                 number = getString("number"),
                                 description = getString("description"),
                                 partner = partner,
+                                organizationId = getString("organization_id"),
                                 createdOn = getLong("created_on")
                             )
                         }
