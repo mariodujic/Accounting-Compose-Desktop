@@ -2,10 +2,7 @@ package com.acc.features.home.expenses.add.presentation.viewmodel
 
 import com.acc.features.home.partners.data.repository.PartnersRepository
 import com.navigation.Entry
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class AddExpenseViewModel(
     private val partnersRepository: PartnersRepository
@@ -37,6 +34,10 @@ class AddExpenseViewModel(
     }
 
     val partners = partnersRepository.getPartners()
+
+    val expenseValid = combine(_accountNumber, _partnerId) { accountNumber, partnerId ->
+        accountNumber.isNotEmpty() && partnerId.isNotEmpty()
+    }
 
     fun addExpense() {
 

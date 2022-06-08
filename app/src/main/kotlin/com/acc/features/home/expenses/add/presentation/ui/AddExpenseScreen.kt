@@ -32,6 +32,8 @@ fun AddExpenseScreen(
     var expandedPartners by remember { mutableStateOf(false) }
     val partners by viewModel.partners.collectAsState(initial = emptyList())
 
+    val expenseValid by viewModel.expenseValid.collectAsState(initial = false)
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -93,7 +95,10 @@ fun AddExpenseScreen(
                         horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Button(onClick = viewModel::addExpense) {
+                        Button(
+                            enabled = expenseValid,
+                            onClick = viewModel::addExpense
+                        ) {
                             Text(text = locale.addExpense)
                         }
                     }
