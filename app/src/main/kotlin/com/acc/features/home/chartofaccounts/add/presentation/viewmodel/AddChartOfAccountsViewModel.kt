@@ -41,6 +41,8 @@ class AddChartOfAccountsViewModel(
         _partnerId.tryEmit(partnerId)
     }
 
+    val partners = partnersRepository.getPartners()
+
     val accountValid = combine(_accountNumber, _accountDescription) { number, description ->
         number.isNotEmpty() && description.isNotEmpty()
     }
@@ -68,6 +70,4 @@ class AddChartOfAccountsViewModel(
             }
         }
     }
-
-    val partners = partnersRepository.getPartners()
 }

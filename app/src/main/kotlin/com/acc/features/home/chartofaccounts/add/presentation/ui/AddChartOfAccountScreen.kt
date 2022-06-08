@@ -31,11 +31,12 @@ fun AddChartOfAccountScreen(
 
     val accountNumber by viewModel.accountNumber.collectAsState()
     val accountDescription by viewModel.accountDescription.collectAsState()
-    val connectedPartnerName by viewModel.partnerName.collectAsState(initial = locale.notSelectedLabel)
-    val accountValid by viewModel.accountValid.collectAsState(initial = false)
 
+    val connectedPartnerName by viewModel.partnerName.collectAsState(initial = locale.notSelectedLabel)
     val partners by viewModel.partners.collectAsState(initial = emptyList())
     var expandedPartners by remember { mutableStateOf(false) }
+
+    val accountValid by viewModel.accountValid.collectAsState(initial = false)
 
     val addChartAccountResult by viewModel.addChartResult.collectAsState()
 

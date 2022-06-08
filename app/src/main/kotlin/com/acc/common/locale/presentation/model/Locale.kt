@@ -30,6 +30,9 @@ interface Locale {
 
     /*Add expense*/
     val addExpenseToolbarTitle: String
+    val addExpense: String
+    val addExpenseAccount: String
+    val addExpenseDescription: String
 
     /*Add sales*/
     val addSalesToolbarTitle: String
@@ -88,6 +91,9 @@ object English : Locale {
 
     /*Add expense*/
     override val addExpenseToolbarTitle = "Add expense"
+    override val addExpense = "Add expense"
+    override val addExpenseAccount = "Expense number"
+    override val addExpenseDescription = "Expense description"
 
     /*Add sales*/
     override val addSalesToolbarTitle = "Add sales"
@@ -146,6 +152,9 @@ object Croatian : Locale {
 
     /*Add expense*/
     override val addExpenseToolbarTitle = "Dodaj ulazni račun"
+    override val addExpense = "Dodaj trošak"
+    override val addExpenseAccount = "Konto"
+    override val addExpenseDescription = "Opis"
 
     /*Add sales*/
     override val addSalesToolbarTitle = "Dodaj izlazni račun"
